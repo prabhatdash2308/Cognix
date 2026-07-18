@@ -1,0 +1,37 @@
+{
+  "name": "@cognix/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Typed client SDK for the Cognix API.",
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@cognix/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@cognix/config": "workspace:*",
+    "@types/node": "^22.10.6",
+    "eslint": "^9.18.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  }
+}

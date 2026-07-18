@@ -1,0 +1,13 @@
+{
+  "name": "@cognix/gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cognix API Gateway — placeholder. Edge routing, auth, and rate limiting will live here.",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

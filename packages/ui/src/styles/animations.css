@@ -1,0 +1,243 @@
+/**
+ * Cognix UI — Animation Keyframes
+ *
+ * All animation names follow the pattern: cx-{name}
+ * This prevents collisions with Tailwind's built-in animations.
+ *
+ * Usage in components:
+ *   animate-[cx-fade-in_var(--duration-fast)_var(--ease-out)]
+ */
+
+@layer base {
+  /* ── Fade ─────────────────────────────────────────────────────────────── */
+  @keyframes cx-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes cx-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* ── Scale ────────────────────────────────────────────────────────────── */
+  @keyframes cx-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes cx-scale-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* ── Slide up (content entering from below) ───────────────────────────── */
+  @keyframes cx-slide-up-fade {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Slide down (content entering from above) ─────────────────────────── */
+  @keyframes cx-slide-down-fade {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Slide left (content entering from right) ─────────────────────────── */
+  @keyframes cx-slide-left-fade {
+    from {
+      opacity: 0;
+      transform: translateX(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Slide right (content entering from left) ─────────────────────────── */
+  @keyframes cx-slide-right-fade {
+    from {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Dialog / Modal ───────────────────────────────────────────────────── */
+  @keyframes cx-dialog-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes cx-dialog-out {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+  }
+
+  /* ── Overlay ──────────────────────────────────────────────────────────── */
+  @keyframes cx-overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes cx-overlay-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* ── Dropdown / Popover ───────────────────────────────────────────────── */
+  @keyframes cx-dropdown-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes cx-dropdown-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.97) translateY(-4px);
+    }
+  }
+
+  /* ── Toast / Notification (slide in from right edge) ─────────────────── */
+  @keyframes cx-toast-in {
+    from {
+      opacity: 0;
+      transform: translateX(calc(100% + 1.5rem));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes cx-toast-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(calc(100% + 1.5rem));
+    }
+  }
+
+  /* ── Spinner ──────────────────────────────────────────────────────────── */
+  @keyframes cx-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ── Pulse (skeleton loader) ──────────────────────────────────────────── */
+  @keyframes cx-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  /* ── Shimmer (skeleton loader) ────────────────────────────────────────── */
+  @keyframes cx-shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+
+  /* ── Accordion ────────────────────────────────────────────────────────── */
+  @keyframes cx-accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes cx-accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+}

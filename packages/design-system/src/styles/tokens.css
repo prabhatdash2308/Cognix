@@ -1,0 +1,240 @@
+/**
+ * Cognix Design System — Design Tokens
+ *
+ * All tokens are declared via Tailwind CSS v4's @theme directive.
+ * They are available as CSS custom properties AND as Tailwind utility classes.
+ *
+ * Naming conventions:
+ *   --color-*        → color tokens
+ *   --font-*         → typography tokens
+ *   --text-*         → font size + line-height
+ *   --font-weight-*  → font weights
+ *   --radius-*       → border radius
+ *   --shadow-*       → box shadows
+ *   --duration-*     → animation durations
+ *   --ease-*         → animation easing
+ *   --z-*            → z-index scale
+ */
+
+@theme {
+  /* ───────────────────────────────────────────
+     COLOR PALETTE
+     Base scale: indigo/violet primary on slate neutrals.
+     All values are in oklch for perceptual uniformity.
+  ─────────────────────────────────────────── */
+
+  /* Brand (Indigo → Violet gradient family) */
+  --color-brand-50: oklch(0.974 0.015 275);
+  --color-brand-100: oklch(0.944 0.035 275);
+  --color-brand-200: oklch(0.888 0.072 275);
+  --color-brand-300: oklch(0.816 0.12 275);
+  --color-brand-400: oklch(0.726 0.165 275);
+  --color-brand-500: oklch(0.627 0.2 275);
+  --color-brand-600: oklch(0.546 0.21 275);
+  --color-brand-700: oklch(0.456 0.195 275);
+  --color-brand-800: oklch(0.374 0.162 275);
+  --color-brand-900: oklch(0.305 0.122 275);
+  --color-brand-950: oklch(0.218 0.082 275);
+
+  /* Neutral (Slate family) */
+  --color-neutral-0: oklch(1 0 0);
+  --color-neutral-50: oklch(0.984 0.003 247);
+  --color-neutral-100: oklch(0.967 0.005 252);
+  --color-neutral-200: oklch(0.93 0.01 252);
+  --color-neutral-300: oklch(0.872 0.015 252);
+  --color-neutral-400: oklch(0.707 0.022 252);
+  --color-neutral-500: oklch(0.556 0.022 252);
+  --color-neutral-600: oklch(0.446 0.018 252);
+  --color-neutral-700: oklch(0.367 0.015 252);
+  --color-neutral-800: oklch(0.28 0.012 252);
+  --color-neutral-850: oklch(0.22 0.01 252);
+  --color-neutral-900: oklch(0.168 0.008 252);
+  --color-neutral-950: oklch(0.11 0.005 252);
+  --color-neutral-1000: oklch(0 0 0);
+
+  /* Semantic Status Colors */
+  --color-success-light: oklch(0.902 0.095 145);
+  --color-success: oklch(0.648 0.158 145);
+  --color-success-dark: oklch(0.43 0.116 145);
+
+  --color-warning-light: oklch(0.95 0.1 80);
+  --color-warning: oklch(0.762 0.18 80);
+  --color-warning-dark: oklch(0.52 0.14 80);
+
+  --color-error-light: oklch(0.93 0.085 20);
+  --color-error: oklch(0.638 0.208 20);
+  --color-error-dark: oklch(0.42 0.15 20);
+
+  --color-info-light: oklch(0.92 0.065 220);
+  --color-info: oklch(0.596 0.165 220);
+  --color-info-dark: oklch(0.4 0.12 220);
+
+  /* ── Semantic Aliases (dark-first design) ── */
+
+  /* Backgrounds */
+  --color-bg-base: var(--color-neutral-950);
+  --color-bg-raised: var(--color-neutral-900);
+  --color-bg-overlay: var(--color-neutral-850);
+  --color-bg-sunken: oklch(0.08 0.004 252);
+
+  /* Surfaces */
+  --color-surface: var(--color-neutral-900);
+  --color-surface-raised: var(--color-neutral-850);
+  --color-surface-hover: var(--color-neutral-800);
+  --color-surface-active: var(--color-neutral-700);
+
+  /* Borders */
+  --color-border: var(--color-neutral-800);
+  --color-border-strong: var(--color-neutral-700);
+  --color-border-focus: var(--color-brand-500);
+
+  /* Text */
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-400);
+  --color-text-tertiary: var(--color-neutral-600);
+  --color-text-disabled: var(--color-neutral-700);
+  --color-text-inverse: var(--color-neutral-950);
+  --color-text-link: var(--color-brand-400);
+  --color-text-link-hover: var(--color-brand-300);
+
+  /* Accent / Brand aliases */
+  --color-accent: var(--color-brand-500);
+  --color-accent-hover: var(--color-brand-400);
+  --color-accent-active: var(--color-brand-600);
+  --color-accent-subtle: oklch(0.627 0.2 275 / 0.12);
+  --color-accent-foreground: var(--color-neutral-0);
+
+  /* ───────────────────────────────────────────
+     TYPOGRAPHY
+  ─────────────────────────────────────────── */
+
+  /* Font Families */
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, "Courier New", monospace;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Font Sizes + Line Heights */
+  --text-2xs: 0.625rem; /* 10px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ───────────────────────────────────────────
+     SPACING
+  ─────────────────────────────────────────── */
+  --spacing-0: 0px;
+  --spacing-px: 1px;
+  --spacing-0\.5: 0.125rem; /* 2px */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-1\.5: 0.375rem; /* 6px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-2\.5: 0.625rem; /* 10px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-3\.5: 0.875rem; /* 14px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-7: 1.75rem; /* 28px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-9: 2.25rem; /* 36px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-11: 2.75rem; /* 44px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-14: 3.5rem; /* 56px */
+  --spacing-16: 4rem; /* 64px */
+  --spacing-18: 4.5rem; /* 72px */
+  --spacing-20: 5rem; /* 80px */
+  --spacing-24: 6rem; /* 96px */
+  --spacing-28: 7rem; /* 112px */
+  --spacing-32: 8rem; /* 128px */
+
+  /* ───────────────────────────────────────────
+     BORDER RADIUS
+  ─────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-xs: 0.125rem; /* 2px */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-3xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* ───────────────────────────────────────────
+     SHADOWS
+  ─────────────────────────────────────────── */
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.18);
+
+  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.22), 0 1px 2px -1px oklch(0 0 0 / 0.14);
+
+  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.28), 0 2px 4px -2px oklch(0 0 0 / 0.18);
+
+  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.32), 0 4px 6px -4px oklch(0 0 0 / 0.2);
+
+  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.36), 0 8px 10px -6px oklch(0 0 0 / 0.22);
+
+  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.5);
+
+  /* Brand glow — used for focus rings and highlighted states */
+  --shadow-glow-brand: 0 0 0 1px var(--color-border-focus), 0 0 16px 2px oklch(0.627 0.2 275 / 0.3);
+
+  --shadow-glow-sm: 0 0 8px 0 oklch(0.627 0.2 275 / 0.2);
+
+  /* Inner shadows */
+  --shadow-inner: inset 0 2px 4px 0 oklch(0 0 0 / 0.2);
+
+  /* ───────────────────────────────────────────
+     MOTION
+  ─────────────────────────────────────────── */
+  --duration-instant: 50ms;
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+  --duration-lazy: 800ms;
+
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ───────────────────────────────────────────
+     Z-INDEX
+  ─────────────────────────────────────────── */
+  --z-hide: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-popover: 1400;
+  --z-tooltip: 1500;
+  --z-toast: 1600;
+  --z-max: 9999;
+}

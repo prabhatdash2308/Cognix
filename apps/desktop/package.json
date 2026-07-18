@@ -1,0 +1,13 @@
+{
+  "name": "@cognix/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cognix desktop application — placeholder.",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

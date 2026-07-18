@@ -1,0 +1,18 @@
+# Dependencies & lockfiles
+node_modules/
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+coverage/
+
+# Generated
+CHANGELOG.md
+
+# Python
+__pycache__/
+.venv/

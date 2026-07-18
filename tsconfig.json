@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./packages/config/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@cognix/ui": ["packages/ui/src/index.ts"],
+      "@cognix/ui/*": ["packages/ui/src/*"],
+      "@cognix/design-system": ["packages/design-system/src/index.ts"],
+      "@cognix/design-system/*": ["packages/design-system/src/*"],
+      "@cognix/config/*": ["packages/config/*"],
+      "@cognix/types": ["packages/types/src/index.ts"],
+      "@cognix/types/*": ["packages/types/src/*"],
+      "@cognix/database": ["packages/database/src/index.ts"],
+      "@cognix/auth": ["packages/auth/src/index.ts"],
+      "@cognix/ai": ["packages/ai/src/index.ts"],
+      "@cognix/sdk": ["packages/sdk/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "**/dist", "**/.next", "**/build"]
+}
