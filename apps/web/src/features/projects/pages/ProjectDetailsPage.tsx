@@ -94,6 +94,22 @@ export function ProjectDetailsPage({ workspaceId, projectId }: ProjectDetailsPag
         </div>
       </header>
 
+      {/* Project Navigation */}
+      <div className="border-b px-6 flex items-center gap-6 text-sm font-medium">
+        <Link
+          href={`/workspaces/${workspaceId}/projects/${projectId}`}
+          className="border-b-2 border-primary py-3 text-foreground"
+        >
+          Dashboard
+        </Link>
+        <Link
+          href={`/workspaces/${workspaceId}/projects/${projectId}/tasks`}
+          className="border-b-2 border-transparent py-3 text-muted-foreground hover:text-foreground hover:border-muted"
+        >
+          Tasks
+        </Link>
+      </div>
+
       {/* Main Content Area */}
       <div className="flex-1 overflow-auto p-6 md:p-8">
         <div className="max-w-6xl mx-auto space-y-8">
@@ -106,7 +122,9 @@ export function ProjectDetailsPage({ workspaceId, projectId }: ProjectDetailsPag
                 workflow.
               </p>
               <div className="flex items-center gap-3 mt-6">
-                <Button>Create Task</Button>
+                <Link href={`/workspaces/${workspaceId}/projects/${projectId}/tasks`}>
+                  <Button>View Tasks</Button>
+                </Link>
                 <Button variant="outline">Add Agent</Button>
               </div>
             </div>

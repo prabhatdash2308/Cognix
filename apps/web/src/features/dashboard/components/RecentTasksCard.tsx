@@ -33,7 +33,7 @@ export function RecentTasksCard({ tasks, isLoading }: RecentTasksCardProps) {
                     {task.title}
                   </span>
                   <span className="text-[var(--text-xs)] text-[var(--color-text-secondary)]">
-                    {task.assignee ? "Assigned" : "Unassigned"}
+                    {task.assigneeId ? "Assigned" : "Unassigned"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">

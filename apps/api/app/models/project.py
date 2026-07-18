@@ -4,6 +4,13 @@ from __future__ import annotations
 
 import enum
 from datetime import UTC, datetime
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.label import Label
+    from app.models.task import Task
+    from app.models.user import User
+    from app.models.workspace import Workspace
 
 from sqlalchemy import DateTime, Enum, ForeignKey, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
@@ -71,9 +78,13 @@ class Project(UUIDPrimaryKeyMixin, TimestampMixin, SoftDeleteMixin, Base):
 
     archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
-    workspace: Mapped[Workspace] = relationship(back_populates="projects")  # type: ignore[name-defined]  # noqa: F821
-    owner: Mapped[User] = relationship()  # type: ignore[name-defined]  # noqa: F821
+    workspace: Mapped[Workspace] = relationship(back_populates="projects")
+    owner: Mapped[User] = relationship()
     members: Mapped[list[ProjectMember]] = relationship(
+        back_populates="project", cascade="all, delete-orphan"
+    )
+    tasks: Mapped[list[Task]] = relationship(back_populates="project", cascade="all, delete-orphan")
+    labels: Mapped[list[Label]] = relationship(
         back_populates="project", cascade="all, delete-orphan"
     )
 
@@ -108,7 +119,7 @@ class ProjectMember(UUIDPrimaryKeyMixin, Base):
     )
 
     project: Mapped[Project] = relationship(back_populates="members")
-    user: Mapped[User] = relationship()  # type: ignore[name-defined]  # noqa: F821
+    user: Mapped[User] = relationship()
 
     def __repr__(self) -> str:
         return (

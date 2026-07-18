@@ -9,6 +9,7 @@ from app.models.preference import Preference
 from app.models.project import Project, ProjectMember
 from app.models.role import Permission, Role, RolePermission
 from app.models.session import Session
+from app.models.task import Label, Task, TaskActivity, TaskLabel, TaskWatcher
 from app.models.user import User
 from app.models.workspace import Workspace
 
@@ -16,6 +17,7 @@ __all__ = [
     "AuditLog",
     "Base",
     "Invitation",
+    "Label",
     "Organization",
     "OrganizationMember",
     "Permission",
@@ -25,6 +27,10 @@ __all__ = [
     "Role",
     "RolePermission",
     "Session",
+    "Task",
+    "TaskActivity",
+    "TaskLabel",
+    "TaskWatcher",
     "User",
     "Workspace",
     "WorkspaceMember",

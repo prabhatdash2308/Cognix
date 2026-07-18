@@ -21,6 +21,7 @@ import type {
 } from "@cognix/types";
 import type { Invitation } from "@cognix/types";
 import type { UserPreference, UpdatePreferenceRequest } from "@cognix/types";
+import type { Task, TaskCreateInput, TaskUpdateInput, TaskBulkUpdateInput } from "@cognix/types";
 
 import { CognixApiError } from "./errors.js";
 
@@ -69,6 +70,7 @@ export class CognixClient {
   public readonly projects: ProjectsClient;
   public readonly invitations: InvitationsClient;
   public readonly preferences: PreferencesClient;
+  public readonly tasks: TasksClient;
 
   constructor(options: CognixClientOptions) {
     this.baseUrl = options.baseUrl.replace(/\/$/, "");
@@ -82,6 +84,7 @@ export class CognixClient {
     this.projects = new ProjectsClient(this);
     this.invitations = new InvitationsClient(this);
     this.preferences = new PreferencesClient(this);
+    this.tasks = new TasksClient(this);
   }
 
   /** Liveness/health probe for the API. */
@@ -451,5 +454,49 @@ class ProjectsClient {
     await this.http.request<undefined>(`/api/v1/projects/${projectId}/members/${userId}`, {
       method: "DELETE",
     });
+  }
+}
+
+class TasksClient {
+  constructor(private readonly http: CognixClient) {}
+
+  async get(taskId: string): Promise<Task> {
+    const r = await this.http.request<DataEnvelope<Task>>(`/api/v1/tasks/${taskId}`);
+    return r.data;
+  }
+
+  async listByProject(projectId: string): Promise<Task[]> {
+    const r = await this.http.request<DataEnvelope<Task[]>>(`/api/v1/tasks/project/${projectId}`);
+    return r.data;
+  }
+
+  async create(body: TaskCreateInput): Promise<Task> {
+    const r = await this.http.request<DataEnvelope<Task>>("/api/v1/tasks", {
+      method: "POST",
+      body,
+    });
+    return r.data;
+  }
+
+  async update(taskId: string, body: Omit<TaskUpdateInput, "id">): Promise<Task> {
+    const r = await this.http.request<DataEnvelope<Task>>(`/api/v1/tasks/${taskId}`, {
+      method: "PATCH",
+      body,
+    });
+    return r.data;
+  }
+
+  async delete(taskId: string): Promise<void> {
+    await this.http.request<undefined>(`/api/v1/tasks/${taskId}`, {
+      method: "DELETE",
+    });
+  }
+
+  async bulkUpdate(body: TaskBulkUpdateInput): Promise<Task[]> {
+    const r = await this.http.request<DataEnvelope<Task[]>>("/api/v1/tasks/bulk", {
+      method: "POST",
+      body,
+    });
+    return r.data;
   }
 }

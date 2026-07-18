@@ -9,6 +9,7 @@ from app.api.routes.v1 import (
     organizations,
     preferences,
     projects,
+    tasks,
     users,
     workspaces,
 )
@@ -27,3 +28,4 @@ api_router.include_router(workspaces.router, prefix=v1_prefix)
 api_router.include_router(projects.router, prefix=v1_prefix)
 api_router.include_router(invitations.router, prefix=v1_prefix)
 api_router.include_router(preferences.router, prefix=v1_prefix)
+api_router.include_router(tasks.router, prefix=v1_prefix)
