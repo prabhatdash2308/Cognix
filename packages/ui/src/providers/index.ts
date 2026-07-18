@@ -1,8 +1,4 @@
-export {
-  ThemeProvider,
-  ThemeScript,
-  useThemeContext,
-} from "./ThemeProvider.js";
+export { ThemeProvider, ThemeScript, useThemeContext } from "./ThemeProvider.js";
 
 export type {
   ThemeContextValue,

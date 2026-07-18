@@ -27,18 +27,14 @@ export function SidebarSection({ section, isExpanded }: SidebarSectionProps) {
             "px-3 pb-1 pt-3",
             "text-[var(--text-xs)] font-[var(--font-weight-medium)]",
             "text-[var(--color-text-tertiary)] uppercase tracking-[var(--tracking-wider)]",
-            "select-none"
+            "select-none",
           )}
           aria-hidden
         >
           {section.label}
         </div>
       )}
-      <ul
-        className="space-y-0.5"
-        role="list"
-        aria-label={section.label ?? "Navigation"}
-      >
+      <ul className="space-y-0.5" role="list" aria-label={section.label ?? "Navigation"}>
         {section.items.map((item) => (
           <SidebarItem key={item.id} item={item} isExpanded={isExpanded} />
         ))}

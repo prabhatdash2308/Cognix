@@ -30,7 +30,10 @@ export default function CreateWorkspacePage(): React.ReactElement {
 
     try {
       const token = getAccessToken();
-      if (!token) { router.push("/sign-in"); return; }
+      if (!token) {
+        router.push("/sign-in");
+        return;
+      }
       const client = createAuthClient(token);
       await client.workspaces.create(orgId, { name, ...(description ? { description } : {}) });
       sessionStorage.removeItem("__cognix_pending_org_id");
@@ -48,7 +51,13 @@ export default function CreateWorkspacePage(): React.ReactElement {
       <div className="onboard-steps">
         <div className="onboard-step onboard-step--done">
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden>
-            <path d="M2 5l2.5 2.5L8 3" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M2 5l2.5 2.5L8 3"
+              stroke="#34d399"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           <span>Organization</span>
         </div>
@@ -60,7 +69,16 @@ export default function CreateWorkspacePage(): React.ReactElement {
       </div>
 
       <div className="onboard-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
           <line x1="8" y1="21" x2="16" y2="21" />
           <line x1="12" y1="17" x2="12" y2="21" />
@@ -72,11 +90,17 @@ export default function CreateWorkspacePage(): React.ReactElement {
         Workspaces are where your team collaborates on projects, tasks, and AI agents.
       </p>
 
-      {error && <div className="onboard-error" role="alert">{error}</div>}
+      {error && (
+        <div className="onboard-error" role="alert">
+          {error}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="onboard-form" noValidate>
         <div className="onboard-field">
-          <label htmlFor="ws-name" className="onboard-label">Workspace name</label>
+          <label htmlFor="ws-name" className="onboard-label">
+            Workspace name
+          </label>
           <input
             id="ws-name"
             type="text"
@@ -116,13 +140,11 @@ export default function CreateWorkspacePage(): React.ReactElement {
           >
             ← Back
           </button>
-          <button
-            type="submit"
-            className="onboard-button"
-            disabled={isLoading || !name.trim()}
-          >
+          <button type="submit" className="onboard-button" disabled={isLoading || !name.trim()}>
             {isLoading ? (
-              <><span className="onboard-spinner" aria-hidden /> Creating…</>
+              <>
+                <span className="onboard-spinner" aria-hidden /> Creating…
+              </>
             ) : (
               <>Launch workspace 🚀</>
             )}

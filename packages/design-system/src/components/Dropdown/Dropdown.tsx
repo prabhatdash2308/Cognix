@@ -1,4 +1,3 @@
-
 import * as RadixDropdown from "@radix-ui/react-dropdown-menu";
 import { cn } from "../../utils/cn.js";
 import type {
@@ -41,12 +40,7 @@ function CheckIcon() {
 /* ─── Item renderers ────────────────────────────────────────────────────── */
 function renderItem(item: DropdownMenuItem, idx: number): React.ReactNode {
   if (item.type === "separator") {
-    return (
-      <RadixDropdown.Separator
-        key={idx}
-        className="my-1 h-px bg-[var(--color-border)]"
-      />
-    );
+    return <RadixDropdown.Separator key={idx} className="my-1 h-px bg-[var(--color-border)]" />;
   }
 
   if (item.type === "label") {
@@ -88,7 +82,7 @@ function renderItem(item: DropdownMenuItem, idx: number): React.ReactNode {
       className={cn(
         itemBase,
         defItem.destructive &&
-          "text-[var(--color-error)] data-[highlighted]:bg-[oklch(0.638_0.208_20_/_0.12)]"
+          "text-[var(--color-error)] data-[highlighted]:bg-[oklch(0.638_0.208_20_/_0.12)]",
       )}
     >
       {defItem.icon && (
@@ -154,7 +148,7 @@ export function Dropdown({
             "data-[state=open]:animate-[dropdownIn_var(--duration-fast)_var(--ease-out)]",
             "data-[state=closed]:animate-[dropdownOut_var(--duration-fast)_var(--ease-in)]",
             "origin-[var(--radix-dropdown-menu-content-transform-origin)]",
-            "will-change-[transform,opacity]"
+            "will-change-[transform,opacity]",
           )}
         >
           {items.map((item, idx) => renderItem(item, idx))}

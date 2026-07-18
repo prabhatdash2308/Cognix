@@ -1,13 +1,7 @@
 import type { HTMLAttributes } from "react";
 
 export type BadgeVariant =
-  | "default"
-  | "brand"
-  | "success"
-  | "warning"
-  | "error"
-  | "info"
-  | "outline";
+  "default" | "brand" | "success" | "warning" | "error" | "info" | "outline";
 
 export type BadgeSize = "sm" | "md" | "lg";
 

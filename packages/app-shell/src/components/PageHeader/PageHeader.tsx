@@ -44,7 +44,7 @@ export function PageHeader({
         "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4",
         "pb-6",
         divided && "border-b border-[var(--color-border)] mb-6",
-        className
+        className,
       )}
     >
       <div className="flex flex-col gap-1 min-w-0 flex-1">
@@ -58,11 +58,7 @@ export function PageHeader({
         )}
       </div>
 
-      {actions && (
-        <div className="flex items-center gap-2 shrink-0">
-          {actions}
-        </div>
-      )}
+      {actions && <div className="flex items-center gap-2 shrink-0">{actions}</div>}
     </div>
   );
 }

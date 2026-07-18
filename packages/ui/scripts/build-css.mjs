@@ -15,9 +15,9 @@ const root = dirname(__dirname);
 
 mkdirSync(join(root, "dist"), { recursive: true });
 
-execSync(
-  "npx @tailwindcss/cli -i ./src/styles/globals.css -o ./dist/globals.css --minify",
-  { cwd: root, stdio: "inherit" }
-);
+execSync("npx @tailwindcss/cli -i ./src/styles/globals.css -o ./dist/globals.css --minify", {
+  cwd: root,
+  stdio: "inherit",
+});
 
 console.log("✅  globals.css compiled → dist/globals.css");

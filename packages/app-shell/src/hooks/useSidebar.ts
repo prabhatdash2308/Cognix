@@ -68,11 +68,7 @@ function writeStorage(key: string, value: boolean): void {
 /* ─── Hook ───────────────────────────────────────────────────────────────── */
 
 export function useSidebar(options: UseSidebarOptions = {}): UseSidebarReturn {
-  const {
-    persist = true,
-    storageKey = "cognix-sidebar",
-    hoverExpand = true,
-  } = options;
+  const { persist = true, storageKey = "cognix-sidebar", hoverExpand = true } = options;
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(() => {

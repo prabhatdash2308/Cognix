@@ -18,13 +18,7 @@
  *   <AppLayout />
  * </AppShellProvider>
  */
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useSidebar } from "../hooks/useSidebar.js";
 import { useCommandPalette } from "../hooks/useCommandPalette.js";
@@ -115,9 +109,7 @@ export interface AppShellProviderProps {
 
 /* ─── Context ─────────────────────────────────────────────────────────────── */
 
-const AppShellContext = createContext<AppShellContextValue | undefined>(
-  undefined
-);
+const AppShellContext = createContext<AppShellContextValue | undefined>(undefined);
 
 /* ─── Provider ────────────────────────────────────────────────────────────── */
 
@@ -142,14 +134,13 @@ export function AppShellProvider({
   const commandPalette = useCommandPalette();
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [breadcrumbs, setBreadcrumbs] =
-    useState<BreadcrumbItem[]>(initialBreadcrumbs);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>(initialBreadcrumbs);
 
   const onWorkspaceChange = useCallback(
     (workspaceId: string) => {
       onWorkspaceChangeProp?.(workspaceId);
     },
-    [onWorkspaceChangeProp]
+    [onWorkspaceChangeProp],
   );
 
   const value = useMemo<AppShellContextValue>(
@@ -221,14 +212,10 @@ export function AppShellProvider({
       notifications,
       breadcrumbs,
       onWorkspaceChange,
-    ]
+    ],
   );
 
-  return (
-    <AppShellContext.Provider value={value}>
-      {children}
-    </AppShellContext.Provider>
-  );
+  return <AppShellContext.Provider value={value}>{children}</AppShellContext.Provider>;
 }
 
 AppShellProvider.displayName = "AppShellProvider";

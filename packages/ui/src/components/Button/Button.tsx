@@ -97,11 +97,11 @@ const buttonVariants = cva(
         ].join(" "),
       },
       size: {
-        xs:       "h-7  px-2.5 text-[var(--text-xs)]",
-        sm:       "h-8  px-3   text-[var(--text-sm)]",
-        md:       "h-9  px-4   text-[var(--text-sm)]",
-        lg:       "h-10 px-5   text-[var(--text-base)]",
-        xl:       "h-12 px-6   text-[var(--text-base)]",
+        xs: "h-7  px-2.5 text-[var(--text-xs)]",
+        sm: "h-8  px-3   text-[var(--text-sm)]",
+        md: "h-9  px-4   text-[var(--text-sm)]",
+        lg: "h-10 px-5   text-[var(--text-base)]",
+        xl: "h-12 px-6   text-[var(--text-base)]",
         /** Square icon-only button — pair with aria-label. */
         "icon-sm": "h-8  w-8  p-0 text-[var(--text-sm)]",
         "icon-md": "h-9  w-9  p-0 text-[var(--text-sm)]",
@@ -117,14 +117,13 @@ const buttonVariants = cva(
       size: "md",
       fullWidth: false,
     },
-  }
+  },
 );
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   /**
    * When true, renders children as a Radix Slot — merging props onto
    * the single child element. Useful for rendering Button as a link.
@@ -159,7 +158,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     const isDisabled = disabled ?? isLoading;
@@ -186,11 +185,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading ? (
           <>
-            <Spinner
-              size={spinnerSize}
-              aria-hidden
-              label={loadingText ?? "Loading"}
-            />
+            <Spinner size={spinnerSize} aria-hidden label={loadingText ?? "Loading"} />
             {loadingText ?? children}
           </>
         ) : (
@@ -210,7 +205,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </Comp>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

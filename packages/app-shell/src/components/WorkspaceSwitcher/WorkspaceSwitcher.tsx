@@ -43,7 +43,7 @@ function WorkspaceAvatar({
         "flex items-center justify-center",
         "bg-[var(--color-accent)] text-white",
         "text-[var(--text-2xs)] font-[var(--font-weight-bold)]",
-        "leading-none select-none uppercase"
+        "leading-none select-none uppercase",
       )}
     >
       {initials.slice(0, 2)}
@@ -59,10 +59,7 @@ export interface WorkspaceSwitcherProps {
   className?: string;
 }
 
-export function WorkspaceSwitcher({
-  onCreateWorkspace,
-  className,
-}: WorkspaceSwitcherProps) {
+export function WorkspaceSwitcher({ onCreateWorkspace, className }: WorkspaceSwitcherProps) {
   const { currentWorkspace, workspaces, onWorkspaceChange } = useAppShell();
 
   return (
@@ -79,7 +76,7 @@ export function WorkspaceSwitcher({
             "transition-colors duration-[var(--duration-fast)]",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
             "group",
-            className
+            className,
           )}
         >
           <WorkspaceAvatar
@@ -112,7 +109,7 @@ export function WorkspaceSwitcher({
             "p-1.5",
             "animate-in fade-in-0 zoom-in-95",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-            "origin-[--radix-dropdown-menu-content-transform-origin]"
+            "origin-[--radix-dropdown-menu-content-transform-origin]",
           )}
         >
           {/* Workspace list */}
@@ -133,7 +130,7 @@ export function WorkspaceSwitcher({
                   "cursor-pointer select-none outline-none",
                   "hover:bg-[var(--color-surface-hover)]",
                   "focus:bg-[var(--color-surface-hover)]",
-                  "transition-colors duration-[var(--duration-fast)]"
+                  "transition-colors duration-[var(--duration-fast)]",
                 )}
               >
                 <WorkspaceAvatar
@@ -170,7 +167,7 @@ export function WorkspaceSwitcher({
               "cursor-pointer select-none outline-none",
               "hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
               "focus:bg-[var(--color-surface-hover)]",
-              "transition-colors duration-[var(--duration-fast)]"
+              "transition-colors duration-[var(--duration-fast)]",
             )}
           >
             <span className="flex size-5 items-center justify-center rounded-[var(--radius-sm)] border border-dashed border-[var(--color-border-strong)]">

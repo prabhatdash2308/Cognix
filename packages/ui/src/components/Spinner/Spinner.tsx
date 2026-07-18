@@ -32,14 +32,13 @@ const spinnerVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface SpinnerProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof spinnerVariants> {
+  extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof spinnerVariants> {
   /** Accessible label for screen readers. @default "Loading" */
   label?: string;
 }
@@ -57,7 +56,7 @@ export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Spinner.displayName = "Spinner";

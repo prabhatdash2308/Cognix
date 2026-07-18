@@ -26,25 +26,25 @@ export type FlexJustify = "start" | "center" | "end" | "between" | "around" | "e
 export type FlexWrap = "nowrap" | "wrap" | "wrap-reverse";
 
 const alignMap: Record<FlexAlign, string> = {
-  start:    "items-start",
-  center:   "items-center",
-  end:      "items-end",
-  stretch:  "items-stretch",
+  start: "items-start",
+  center: "items-center",
+  end: "items-end",
+  stretch: "items-stretch",
   baseline: "items-baseline",
 };
 
 const justifyMap: Record<FlexJustify, string> = {
-  start:   "justify-start",
-  center:  "justify-center",
-  end:     "justify-end",
+  start: "justify-start",
+  center: "justify-center",
+  end: "justify-end",
   between: "justify-between",
-  around:  "justify-around",
-  evenly:  "justify-evenly",
+  around: "justify-around",
+  evenly: "justify-evenly",
 };
 
 const wrapMap: Record<FlexWrap, string> = {
-  nowrap:        "flex-nowrap",
-  wrap:          "flex-wrap",
+  nowrap: "flex-nowrap",
+  wrap: "flex-wrap",
   "wrap-reverse": "flex-wrap-reverse",
 };
 
@@ -76,14 +76,9 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const gapClass =
-      gap !== undefined
-        ? typeof gap === "number"
-          ? `gap-${gap}`
-          : gap
-        : undefined;
+    const gapClass = gap !== undefined ? (typeof gap === "number" ? `gap-${gap}` : gap) : undefined;
 
     return (
       <div
@@ -95,14 +90,14 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
           justifyMap[justify],
           wrapMap[wrap],
           gapClass,
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 Stack.displayName = "Stack";

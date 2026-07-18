@@ -38,15 +38,22 @@ function VerifyEmailContent(): React.ReactElement {
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
             <circle cx="26" cy="26" r="25" stroke="#34d399" strokeWidth="1.5" opacity="0.4" />
             <circle cx="26" cy="26" r="20" fill="rgba(52,211,153,0.1)" />
-            <path d="M17 26l6.5 6.5L36 19" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M17 26l6.5 6.5L36 19"
+              stroke="#34d399"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", margin: "0 0 0.5rem" }}>
           Email verified!
         </h1>
-        <p style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "1.75rem", lineHeight: 1.6 }}>
-          Your email address has been successfully verified.
-          You can now access all Cognix features.
+        <p
+          style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "1.75rem", lineHeight: 1.6 }}
+        >
+          Your email address has been successfully verified. You can now access all Cognix features.
         </p>
         <Link
           href="/sign-in"
@@ -77,15 +84,19 @@ function VerifyEmailContent(): React.ReactElement {
         <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
           <circle cx="26" cy="26" r="25" stroke="#f87171" strokeWidth="1.5" opacity="0.4" />
           <circle cx="26" cy="26" r="20" fill="rgba(248,113,113,0.08)" />
-          <path d="M20 20l12 12M32 20L20 32" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round" />
+          <path
+            d="M20 20l12 12M32 20L20 32"
+            stroke="#f87171"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
         </svg>
       </div>
       <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", margin: "0 0 0.5rem" }}>
         Verification failed
       </h1>
       <p style={{ color: "#64748b", fontSize: "0.9rem", marginBottom: "1.75rem", lineHeight: 1.6 }}>
-        This verification link is invalid or has expired.
-        Please request a new verification email.
+        This verification link is invalid or has expired. Please request a new verification email.
       </p>
       <Link
         href="/sign-in"

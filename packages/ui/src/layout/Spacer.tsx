@@ -42,19 +42,12 @@ export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(
     if (size === undefined) {
       // Greedy flex expander
       return (
-        <div
-          ref={ref}
-          aria-hidden
-          className={cn("flex-1", className)}
-          style={style}
-          {...props}
-        />
+        <div ref={ref} aria-hidden className={cn("flex-1", className)} style={style} {...props} />
       );
     }
 
     // Fixed-size spacer
-    const sizeValue =
-      typeof size === "number" ? `${size * 0.25}rem` : size;
+    const sizeValue = typeof size === "number" ? `${size * 0.25}rem` : size;
 
     const dimensionStyle: React.CSSProperties = {
       ...style,
@@ -75,7 +68,7 @@ export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Spacer.displayName = "Spacer";

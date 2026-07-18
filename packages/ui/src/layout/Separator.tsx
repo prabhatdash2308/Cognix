@@ -38,15 +38,7 @@ export interface SeparatorProps extends HTMLAttributes<HTMLHRElement> {
 }
 
 export const Separator = forwardRef<HTMLHRElement, SeparatorProps>(
-  (
-    {
-      orientation = "horizontal",
-      decorative = false,
-      className,
-      ...props
-    },
-    ref
-  ) => {
+  ({ orientation = "horizontal", decorative = false, className, ...props }, ref) => {
     return (
       <hr
         ref={ref}
@@ -55,15 +47,13 @@ export const Separator = forwardRef<HTMLHRElement, SeparatorProps>(
         aria-orientation={orientation}
         className={cn(
           "border-0 bg-[var(--color-border)] shrink-0",
-          orientation === "horizontal"
-            ? "h-px w-full"
-            : "w-px self-stretch",
-          className
+          orientation === "horizontal" ? "h-px w-full" : "w-px self-stretch",
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Separator.displayName = "Separator";

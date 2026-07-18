@@ -96,7 +96,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const isDisabled = disabled ?? loading;
 
@@ -126,19 +126,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 `rounded-[var(--radius-${size === "xs" || size === "sm" ? "sm" : "md"})]`,
               ]
             : sizeStyles[size],
-          className
+          className,
         )}
         {...props}
       >
         {loading ? (
           <>
-            <Spinner
-              size={size === "lg" || size === "xl" ? "sm" : "xs"}
-              className="text-current"
-            />
-            {!iconOnly && (
-              <span className="ml-2">{children}</span>
-            )}
+            <Spinner size={size === "lg" || size === "xl" ? "sm" : "xs"} className="text-current" />
+            {!iconOnly && <span className="ml-2">{children}</span>}
           </>
         ) : (
           <>
@@ -157,7 +152,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

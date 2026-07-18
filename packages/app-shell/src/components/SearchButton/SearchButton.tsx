@@ -36,7 +36,7 @@ export function SearchButton({ className }: SearchButtonProps) {
         "hover:border-[var(--color-border-strong)] hover:text-[var(--color-text-secondary)]",
         "transition-colors duration-[var(--duration-fast)]",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]",
-        className
+        className,
       )}
     >
       <SearchIcon size={14} aria-hidden />
@@ -47,7 +47,7 @@ export function SearchButton({ className }: SearchButtonProps) {
           "text-[var(--text-2xs)] font-[var(--font-weight-medium)]",
           "text-[var(--color-text-tertiary)]",
           "border border-[var(--color-border)] rounded-[var(--radius-sm)]",
-          "px-1 py-0.5 leading-none"
+          "px-1 py-0.5 leading-none",
         )}
         aria-hidden
       >

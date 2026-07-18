@@ -1,13 +1,9 @@
-
 import * as RadixTabs from "@radix-ui/react-tabs";
 import { cn } from "../../utils/cn.js";
 import type { TabsOrientation, TabsProps, TabsVariant } from "./Tabs.types.js";
 
 /* ─── List variant styles ───────────────────────────────────────────────── */
-const listVariants: Record<
-  TabsVariant,
-  Record<TabsOrientation, string>
-> = {
+const listVariants: Record<TabsVariant, Record<TabsOrientation, string>> = {
   line: {
     horizontal: "border-b border-[var(--color-border)] gap-6",
     vertical: "border-r border-[var(--color-border)] gap-2 flex-col",
@@ -17,16 +13,15 @@ const listVariants: Record<
     vertical: "gap-2 flex-col",
   },
   enclosed: {
-    horizontal: "bg-[var(--color-surface-raised)] p-1 rounded-[var(--radius-lg)] border border-[var(--color-border)]",
-    vertical: "bg-[var(--color-surface-raised)] p-1 rounded-[var(--radius-lg)] border border-[var(--color-border)] flex-col",
+    horizontal:
+      "bg-[var(--color-surface-raised)] p-1 rounded-[var(--radius-lg)] border border-[var(--color-border)]",
+    vertical:
+      "bg-[var(--color-surface-raised)] p-1 rounded-[var(--radius-lg)] border border-[var(--color-border)] flex-col",
   },
 };
 
 /* ─── Trigger variant styles ────────────────────────────────────────────── */
-const triggerVariants: Record<
-  TabsVariant,
-  Record<TabsOrientation, string>
-> = {
+const triggerVariants: Record<TabsVariant, Record<TabsOrientation, string>> = {
   line: {
     horizontal: [
       "border-b-2 border-transparent pb-2 mb-[-1px]",
@@ -86,14 +81,12 @@ export function Tabs({
   return (
     <RadixTabs.Root
       {...(value !== undefined ? { value } : {})}
-      {...((defaultValue ?? items[0]?.value) ? { defaultValue: (defaultValue ?? items[0]?.value) as string } : {})}
+      {...((defaultValue ?? items[0]?.value)
+        ? { defaultValue: (defaultValue ?? items[0]?.value) as string }
+        : {})}
       {...(onValueChange !== undefined ? { onValueChange } : {})}
       orientation={orientation}
-      className={cn(
-        "flex",
-        isHorizontal ? "flex-col" : "flex-row gap-6",
-        fullWidth && "w-full"
-      )}
+      className={cn("flex", isHorizontal ? "flex-col" : "flex-row gap-6", fullWidth && "w-full")}
     >
       <RadixTabs.List
         className={cn(
@@ -101,7 +94,7 @@ export function Tabs({
           listVariants[variant][orientation],
           // Hide scrollbar if horizontal overflowing
           isHorizontal && "overflow-x-auto no-scrollbar",
-          fullWidth && isHorizontal && variant === "line" && "justify-between"
+          fullWidth && isHorizontal && variant === "line" && "justify-between",
         )}
       >
         {items.map((item) => (
@@ -117,7 +110,7 @@ export function Tabs({
               "hover:text-[var(--color-text-primary)]",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-border-focus)]",
               "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
-              triggerVariants[variant][orientation]
+              triggerVariants[variant][orientation],
             )}
           >
             {item.icon && (
@@ -137,7 +130,7 @@ export function Tabs({
           className={cn(
             "flex-1 outline-none",
             isHorizontal && "mt-4",
-            "focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:rounded-[var(--radius-sm)]"
+            "focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:rounded-[var(--radius-sm)]",
           )}
         >
           {item.content}

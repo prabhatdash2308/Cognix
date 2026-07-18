@@ -57,10 +57,7 @@ const cardVariants = cva(
         ].join(" "),
 
         /** Border-only, transparent background. */
-        outline: [
-          "bg-transparent",
-          "border border-[var(--color-border-strong)]",
-        ].join(" "),
+        outline: ["bg-transparent", "border border-[var(--color-border-strong)]"].join(" "),
 
         /** No border, no background — layout container only. */
         ghost: "bg-transparent",
@@ -81,55 +78,47 @@ const cardVariants = cva(
       variant: "default",
       interactive: false,
     },
-  }
+  },
 );
 
 /* ─── Card sub-component variants ───────────────────────────────────────── */
 
-const cardHeaderVariants = cva(
-  "px-6 py-4 flex flex-col gap-1",
-  {
-    variants: {
-      divided: {
-        true: "border-b border-[var(--color-border)]",
-        false: "",
-      },
+const cardHeaderVariants = cva("px-6 py-4 flex flex-col gap-1", {
+  variants: {
+    divided: {
+      true: "border-b border-[var(--color-border)]",
+      false: "",
     },
-    defaultVariants: { divided: false },
-  }
-);
+  },
+  defaultVariants: { divided: false },
+});
 
-const cardFooterVariants = cva(
-  "px-6 py-4 flex items-center gap-3",
-  {
-    variants: {
-      divided: {
-        true: "border-t border-[var(--color-border)]",
-        false: "",
-      },
-      justify: {
-        start:   "justify-start",
-        end:     "justify-end",
-        between: "justify-between",
-        center:  "justify-center",
-      },
+const cardFooterVariants = cva("px-6 py-4 flex items-center gap-3", {
+  variants: {
+    divided: {
+      true: "border-t border-[var(--color-border)]",
+      false: "",
     },
-    defaultVariants: {
-      divided: true,
-      justify: "end",
+    justify: {
+      start: "justify-start",
+      end: "justify-end",
+      between: "justify-between",
+      center: "justify-center",
     },
-  }
-);
+  },
+  defaultVariants: {
+    divided: true,
+    justify: "end",
+  },
+});
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface CardProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 export interface CardHeaderProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardHeaderVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardHeaderVariants> {}
 
 export type CardTitleProps = HTMLAttributes<HTMLHeadingElement>;
 
@@ -141,8 +130,7 @@ export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export interface CardFooterProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardFooterVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardFooterVariants> {}
 
 /* ─── Components ─────────────────────────────────────────────────────────── */
 
@@ -157,7 +145,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       className={cn(cardVariants({ variant, interactive }), className)}
       {...props}
     />
-  )
+  ),
 );
 Card.displayName = "Card";
 
@@ -166,12 +154,8 @@ Card.displayName = "Card";
  */
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ divided, className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardHeaderVariants({ divided }), className)}
-      {...props}
-    />
-  )
+    <div ref={ref} className={cn(cardHeaderVariants({ divided }), className)} {...props} />
+  ),
 );
 CardHeader.displayName = "CardHeader";
 
@@ -184,11 +168,11 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
       ref={ref}
       className={cn(
         "text-[var(--text-base)] font-[var(--font-weight-semibold)] text-[var(--color-text-primary)] leading-snug",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 CardTitle.displayName = "CardTitle";
 
@@ -201,11 +185,11 @@ export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionP
       ref={ref}
       className={cn(
         "text-[var(--text-sm)] text-[var(--color-text-secondary)] leading-normal",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 CardDescription.displayName = "CardDescription";
 
@@ -214,12 +198,8 @@ CardDescription.displayName = "CardDescription";
  */
 export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ padded = true, className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(padded && "px-6 py-4", className)}
-      {...props}
-    />
-  )
+    <div ref={ref} className={cn(padded && "px-6 py-4", className)} {...props} />
+  ),
 );
 CardContent.displayName = "CardContent";
 
@@ -228,12 +208,8 @@ CardContent.displayName = "CardContent";
  */
 export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ divided, justify, className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardFooterVariants({ divided, justify }), className)}
-      {...props}
-    />
-  )
+    <div ref={ref} className={cn(cardFooterVariants({ divided, justify }), className)} {...props} />
+  ),
 );
 CardFooter.displayName = "CardFooter";
 

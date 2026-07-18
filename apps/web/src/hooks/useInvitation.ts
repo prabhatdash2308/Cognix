@@ -10,8 +10,22 @@ function getClient() {
 
 export function useInviteUser() {
   return useMutation({
-    mutationFn: ({ orgId, email, role_name, workspace_id }: { orgId: string; email: string; role_name?: string; workspace_id?: string }) =>
-      getClient().invitations.invite(orgId, { email, ...(role_name ? { role_name } : {}), ...(workspace_id ? { workspace_id } : {}) }),
+    mutationFn: ({
+      orgId,
+      email,
+      role_name,
+      workspace_id,
+    }: {
+      orgId: string;
+      email: string;
+      role_name?: string;
+      workspace_id?: string;
+    }) =>
+      getClient().invitations.invite(orgId, {
+        email,
+        ...(role_name ? { role_name } : {}),
+        ...(workspace_id ? { workspace_id } : {}),
+      }),
   });
 }
 

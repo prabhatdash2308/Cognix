@@ -50,14 +50,14 @@ const inputWrapperVariants = cva(
       fullWidth: {
         true: "w-full",
         false: "",
-      }
+      },
     },
     defaultVariants: {
       state: "default",
       size: "md",
       fullWidth: true,
     },
-  }
+  },
 );
 
 const inputElementClasses = [
@@ -70,13 +70,13 @@ const inputElementClasses = [
   "[&:-webkit-autofill]:[transition:background-color_9999s_ease-in-out]",
 ].join(" ");
 
-const adornmentClasses =
-  "shrink-0 flex items-center text-[var(--color-text-tertiary)]";
+const adornmentClasses = "shrink-0 flex items-center text-[var(--color-text-tertiary)]";
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
+  extends
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
     VariantProps<typeof inputWrapperVariants> {
   /** Visible label rendered above the input. */
   label?: string;
@@ -115,7 +115,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const autoId = useId();
     const id = idProp ?? autoId;
@@ -140,7 +140,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             htmlFor={id}
             className={cn(
               "block text-[var(--text-sm)] font-[var(--font-weight-medium)]",
-              "text-[var(--color-text-primary)]"
+              "text-[var(--color-text-primary)]",
             )}
           >
             {label}
@@ -154,9 +154,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
         <div className={cn(inputWrapperVariants({ state, size, fullWidth }), className)}>
           {startIcon && (
-            <span className={cn(adornmentClasses, `pl-${startPadding}`)}>
-              {startIcon}
-            </span>
+            <span className={cn(adornmentClasses, `pl-${startPadding}`)}>{startIcon}</span>
           )}
 
           <input
@@ -176,7 +174,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               inputElementClasses,
               inputPaddingX,
               "py-0 h-full",
-              focusRing({ width: "2", offset: "0" }).replace("focus:outline-none", "")
+              focusRing({ width: "2", offset: "0" }).replace("focus:outline-none", ""),
             )}
             {...props}
           />
@@ -191,7 +189,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 "text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)]",
                 "transition-colors duration-[var(--duration-fast)]",
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] rounded-full",
-                endIcon ? "mr-1" : `mr-${endPadding}`
+                endIcon ? "mr-1" : `mr-${endPadding}`,
               )}
               aria-label="Clear input"
             >
@@ -199,11 +197,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
 
-          {endIcon && (
-            <span className={cn(adornmentClasses, `pr-${endPadding}`)}>
-              {endIcon}
-            </span>
-          )}
+          {endIcon && <span className={cn(adornmentClasses, `pr-${endPadding}`)}>{endIcon}</span>}
         </div>
 
         {helperText && (
@@ -211,9 +205,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={helperId}
             className={cn(
               "text-[var(--text-xs)]",
-              isError
-                ? "text-[var(--color-error)]"
-                : "text-[var(--color-text-secondary)]"
+              isError ? "text-[var(--color-error)]" : "text-[var(--color-text-secondary)]",
             )}
             role={isError ? "alert" : undefined}
           >
@@ -222,7 +214,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

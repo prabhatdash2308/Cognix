@@ -42,17 +42,12 @@ const itemClass = cn(
   "cursor-pointer select-none outline-none",
   "hover:bg-[var(--color-surface-hover)]",
   "focus:bg-[var(--color-surface-hover)]",
-  "transition-colors duration-[var(--duration-fast)]"
+  "transition-colors duration-[var(--duration-fast)]",
 );
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
 
-export function UserMenu({
-  onProfile,
-  onSettings,
-  onSignOut,
-  className,
-}: UserMenuProps) {
+export function UserMenu({ onProfile, onSettings, onSignOut, className }: UserMenuProps) {
   const { user } = useAppShell();
   const { theme, setTheme, themes } = useThemeContext();
 
@@ -71,7 +66,7 @@ export function UserMenu({
           className={cn(
             "rounded-[var(--radius-full)] focus:outline-none",
             "focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]",
-            className
+            className,
           )}
         >
           <Avatar
@@ -96,7 +91,7 @@ export function UserMenu({
             "p-1.5",
             "animate-in fade-in-0 zoom-in-95",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-            "origin-[--radix-dropdown-menu-content-transform-origin]"
+            "origin-[--radix-dropdown-menu-content-transform-origin]",
           )}
         >
           {/* User info header */}
@@ -126,7 +121,10 @@ export function UserMenu({
           </DropdownMenu.Item>
 
           {/* Settings */}
-          <DropdownMenu.Item {...(onSettings ? { onSelect: onSettings } : {})} className={itemClass}>
+          <DropdownMenu.Item
+            {...(onSettings ? { onSelect: onSettings } : {})}
+            className={itemClass}
+          >
             <SettingsIcon size={14} aria-hidden />
             <span>Settings</span>
           </DropdownMenu.Item>
@@ -156,23 +154,15 @@ export function UserMenu({
                   "shadow-[var(--shadow-lg)]",
                   "p-1.5",
                   "animate-in fade-in-0 zoom-in-95",
-                  "origin-[--radix-dropdown-menu-content-transform-origin]"
+                  "origin-[--radix-dropdown-menu-content-transform-origin]",
                 )}
               >
                 {themes.map((t) => (
-                  <DropdownMenu.Item
-                    key={t}
-                    onSelect={() => setTheme(t)}
-                    className={itemClass}
-                  >
+                  <DropdownMenu.Item key={t} onSelect={() => setTheme(t)} className={itemClass}>
                     {themeIcons[t]}
                     <span className="flex-1 capitalize">{t}</span>
                     {theme === t && (
-                      <CheckIcon
-                        size={14}
-                        className="text-[var(--color-accent)]"
-                        aria-hidden
-                      />
+                      <CheckIcon size={14} className="text-[var(--color-accent)]" aria-hidden />
                     )}
                   </DropdownMenu.Item>
                 ))}
@@ -187,7 +177,7 @@ export function UserMenu({
             {...(onSignOut ? { onSelect: onSignOut } : {})}
             className={cn(
               itemClass,
-              "text-[var(--color-error)] hover:bg-[var(--color-error-light)]/10 focus:bg-[var(--color-error-light)]/10"
+              "text-[var(--color-error)] hover:bg-[var(--color-error-light)]/10 focus:bg-[var(--color-error-light)]/10",
             )}
           >
             <LogOutIcon size={14} aria-hidden />

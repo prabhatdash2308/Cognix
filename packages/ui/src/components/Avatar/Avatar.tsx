@@ -33,59 +33,52 @@ import { cn } from "../../utils/cn.js";
 
 /* ─── Variants ───────────────────────────────────────────────────────────── */
 
-const avatarVariants = cva(
-  "relative inline-flex shrink-0 overflow-hidden",
-  {
-    variants: {
-      size: {
-        xs: "size-6  text-[var(--text-2xs)]",
-        sm: "size-8  text-[var(--text-xs)]",
-        md: "size-10 text-[var(--text-sm)]",
-        lg: "size-12 text-[var(--text-base)]",
-        xl: "size-16 text-[var(--text-lg)]",
-        "2xl": "size-20 text-[var(--text-xl)]",
-      },
-      shape: {
-        circle: "rounded-[var(--radius-full)]",
-        square: "rounded-[var(--radius-lg)]",
-      },
+const avatarVariants = cva("relative inline-flex shrink-0 overflow-hidden", {
+  variants: {
+    size: {
+      xs: "size-6  text-[var(--text-2xs)]",
+      sm: "size-8  text-[var(--text-xs)]",
+      md: "size-10 text-[var(--text-sm)]",
+      lg: "size-12 text-[var(--text-base)]",
+      xl: "size-16 text-[var(--text-lg)]",
+      "2xl": "size-20 text-[var(--text-xl)]",
     },
-    defaultVariants: {
-      size: "md",
-      shape: "circle",
+    shape: {
+      circle: "rounded-[var(--radius-full)]",
+      square: "rounded-[var(--radius-lg)]",
     },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+    shape: "circle",
+  },
+});
 
-const statusVariants = cva(
-  "absolute block rounded-full ring-2 ring-[var(--color-bg)]",
-  {
-    variants: {
-      status: {
-        online:  "bg-[var(--color-success)]",
-        offline: "bg-[var(--color-text-tertiary)]",
-        busy:    "bg-[var(--color-error)]",
-        away:    "bg-[var(--color-warning)]",
-      },
-      size: {
-        xs:  "size-1.5 bottom-0 right-0",
-        sm:  "size-2   bottom-0 right-0",
-        md:  "size-2.5 bottom-0.5 right-0.5",
-        lg:  "size-3   bottom-0.5 right-0.5",
-        xl:  "size-3.5 bottom-1 right-1",
-        "2xl": "size-4  bottom-1 right-1",
-      },
+const statusVariants = cva("absolute block rounded-full ring-2 ring-[var(--color-bg)]", {
+  variants: {
+    status: {
+      online: "bg-[var(--color-success)]",
+      offline: "bg-[var(--color-text-tertiary)]",
+      busy: "bg-[var(--color-error)]",
+      away: "bg-[var(--color-warning)]",
     },
-  }
-);
+    size: {
+      xs: "size-1.5 bottom-0 right-0",
+      sm: "size-2   bottom-0 right-0",
+      md: "size-2.5 bottom-0.5 right-0.5",
+      lg: "size-3   bottom-0.5 right-0.5",
+      xl: "size-3.5 bottom-1 right-1",
+      "2xl": "size-4  bottom-1 right-1",
+    },
+  },
+});
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export type AvatarStatus = "online" | "offline" | "busy" | "away";
 
 export interface AvatarProps
-  extends VariantProps<typeof avatarVariants>,
-    ComponentPropsWithoutRef<typeof RadixAvatar.Root> {
+  extends VariantProps<typeof avatarVariants>, ComponentPropsWithoutRef<typeof RadixAvatar.Root> {
   /** Image URL. Falls back to initials or icon if missing or broken. */
   src?: string;
   /** Alt text for the image and source for computing initials. */
@@ -106,10 +99,7 @@ function getInitials(name: string): string {
   if (parts.length === 1) {
     return (parts[0]?.[0] ?? "?").toUpperCase();
   }
-  return (
-    (parts[0]?.[0] ?? "") +
-    (parts[parts.length - 1]?.[0] ?? "")
-  ).toUpperCase();
+  return ((parts[0]?.[0] ?? "") + (parts[parts.length - 1]?.[0] ?? "")).toUpperCase();
 }
 
 /** Deterministic pastel background from a name string */
@@ -125,22 +115,8 @@ function getColorFromName(name: string): string {
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
 
-export const Avatar = forwardRef<
-  React.ElementRef<typeof RadixAvatar.Root>,
-  AvatarProps
->(
-  (
-    {
-      src,
-      name,
-      status,
-      size = "md",
-      shape = "circle",
-      className,
-      ...props
-    },
-    ref
-  ) => {
+export const Avatar = forwardRef<React.ElementRef<typeof RadixAvatar.Root>, AvatarProps>(
+  ({ src, name, status, size = "md", shape = "circle", className, ...props }, ref) => {
     const initials = name ? getInitials(name) : undefined;
     const fallbackBg = name ? getColorFromName(name) : "var(--color-surface-active)";
     const statusLabel =
@@ -162,11 +138,7 @@ export const Avatar = forwardRef<
       >
         {/* Image */}
         {src && (
-          <RadixAvatar.Image
-            src={src}
-            alt={name ?? "Avatar"}
-            className="size-full object-cover"
-          />
+          <RadixAvatar.Image src={src} alt={name ?? "Avatar"} className="size-full object-cover" />
         )}
 
         {/* Fallback: initials or generic icon */}
@@ -198,7 +170,7 @@ export const Avatar = forwardRef<
         )}
       </RadixAvatar.Root>
     );
-  }
+  },
 );
 
 Avatar.displayName = "Avatar";

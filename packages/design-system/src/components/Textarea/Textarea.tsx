@@ -1,11 +1,5 @@
 import type React from "react";
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-} from "react";
+import { forwardRef, useCallback, useEffect, useId, useRef } from "react";
 import { cn } from "../../utils/cn.js";
 import type { TextareaProps } from "./Textarea.types.js";
 
@@ -32,7 +26,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       onChange,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const autoId = useId();
     const id = idProp ?? autoId;
@@ -45,15 +39,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     // Sync forwardedRef + innerRef
     const setRef = useCallback(
       (node: HTMLTextAreaElement | null) => {
-        (innerRef as React.MutableRefObject<HTMLTextAreaElement | null>).current =
-          node;
+        (innerRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
         if (typeof forwardedRef === "function") forwardedRef(node);
         else if (forwardedRef)
-          (
-            forwardedRef as React.MutableRefObject<HTMLTextAreaElement | null>
-          ).current = node;
+          (forwardedRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
       },
-      [forwardedRef]
+      [forwardedRef],
     );
 
     const resize = useCallback(() => {
@@ -91,7 +82,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cn(
               "text-[var(--text-sm)] font-[var(--font-weight-medium)]",
               "text-[var(--color-text-primary)]",
-              disabled && "opacity-50"
+              disabled && "opacity-50",
             )}
           >
             {label}
@@ -121,30 +112,23 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               ? "border-[var(--color-error)] focus:border-[var(--color-error)] focus:shadow-[0_0_0_1px_var(--color-error)]"
               : "border-[var(--color-border)]",
             disabled && "opacity-50 pointer-events-none",
-            !autoResize && "resize-y"
+            !autoResize && "resize-y",
           )}
           {...props}
         />
 
         {error ? (
-          <p
-            id={errorId}
-            role="alert"
-            className="text-[var(--text-xs)] text-[var(--color-error)]"
-          >
+          <p id={errorId} role="alert" className="text-[var(--text-xs)] text-[var(--color-error)]">
             {error}
           </p>
         ) : helperText ? (
-          <p
-            id={helperId}
-            className="text-[var(--text-xs)] text-[var(--color-text-tertiary)]"
-          >
+          <p id={helperId} className="text-[var(--text-xs)] text-[var(--color-text-tertiary)]">
             {helperText}
           </p>
         ) : null}
       </div>
     );
-  }
+  },
 );
 
 Textarea.displayName = "Textarea";

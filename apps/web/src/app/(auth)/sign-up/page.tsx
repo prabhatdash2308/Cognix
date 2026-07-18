@@ -61,7 +61,9 @@ export default function SignUpPage(): React.ReactElement {
 
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         <div className="auth-field">
-          <label htmlFor="name" className="auth-label">Full name</label>
+          <label htmlFor="name" className="auth-label">
+            Full name
+          </label>
           <input
             id="name"
             type="text"
@@ -76,7 +78,9 @@ export default function SignUpPage(): React.ReactElement {
         </div>
 
         <div className="auth-field">
-          <label htmlFor="email" className="auth-label">Work email</label>
+          <label htmlFor="email" className="auth-label">
+            Work email
+          </label>
           <input
             id="email"
             type="email"
@@ -91,7 +95,9 @@ export default function SignUpPage(): React.ReactElement {
         </div>
 
         <div className="auth-field">
-          <label htmlFor="password" className="auth-label">Password</label>
+          <label htmlFor="password" className="auth-label">
+            Password
+          </label>
           <div className="auth-input-group">
             <input
               id="password"
@@ -123,7 +129,9 @@ export default function SignUpPage(): React.ReactElement {
                   />
                 ))}
               </div>
-              <span className={`auth-strength-label auth-strength-label--${passwordStrength.level}`}>
+              <span
+                className={`auth-strength-label auth-strength-label--${passwordStrength.level}`}
+              >
                 {passwordStrength.label}
               </span>
             </div>
@@ -131,7 +139,9 @@ export default function SignUpPage(): React.ReactElement {
         </div>
 
         <div className="auth-field">
-          <label htmlFor="confirm-password" className="auth-label">Confirm password</label>
+          <label htmlFor="confirm-password" className="auth-label">
+            Confirm password
+          </label>
           <input
             id="confirm-password"
             type={showPassword ? "text" : "password"}
@@ -147,17 +157,21 @@ export default function SignUpPage(): React.ReactElement {
 
         <p className="auth-terms">
           By creating an account, you agree to our{" "}
-          <a href="/terms" className="auth-link">Terms of Service</a> and{" "}
-          <a href="/privacy" className="auth-link">Privacy Policy</a>.
+          <a href="/terms" className="auth-link">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="/privacy" className="auth-link">
+            Privacy Policy
+          </a>
+          .
         </p>
 
-        <button
-          type="submit"
-          className="auth-button auth-button--primary"
-          disabled={isLoading}
-        >
+        <button type="submit" className="auth-button auth-button--primary" disabled={isLoading}>
           {isLoading ? (
-            <><span className="auth-spinner" aria-hidden /> Creating account…</>
+            <>
+              <span className="auth-spinner" aria-hidden /> Creating account…
+            </>
           ) : (
             "Create account"
           )}
@@ -166,7 +180,9 @@ export default function SignUpPage(): React.ReactElement {
 
       <p className="auth-footer-text">
         Already have an account?{" "}
-        <Link href="/sign-in" className="auth-link">Sign in</Link>
+        <Link href="/sign-in" className="auth-link">
+          Sign in
+        </Link>
       </p>
 
       <style>{`

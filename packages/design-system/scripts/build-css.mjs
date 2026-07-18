@@ -12,9 +12,9 @@ const root = dirname(__dirname);
 
 mkdirSync(join(root, "dist"), { recursive: true });
 
-execSync(
-  `npx @tailwindcss/cli -i ./src/styles/index.css -o ./dist/styles.css --minify`,
-  { cwd: root, stdio: "inherit" }
-);
+execSync(`npx @tailwindcss/cli -i ./src/styles/index.css -o ./dist/styles.css --minify`, {
+  cwd: root,
+  stdio: "inherit",
+});
 
 console.log("✅  styles.css built → dist/styles.css");

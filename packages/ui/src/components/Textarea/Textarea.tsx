@@ -20,14 +20,7 @@
  * />
  */
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { forwardRef, useCallback, useEffect, useId, useRef, useState } from "react";
 import type { TextareaHTMLAttributes } from "react";
 import { cn } from "../../utils/cn.js";
 
@@ -80,13 +73,14 @@ const textareaVariants = cva(
       state: "default",
       size: "md",
     },
-  }
+  },
 );
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface TextareaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
+  extends
+    Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
     VariantProps<typeof textareaVariants> {
   /** Visible label rendered above the textarea. */
   label?: string;
@@ -106,18 +100,13 @@ export interface TextareaProps
 
 /* ─── Auto-resize helper ─────────────────────────────────────────────────── */
 
-function adjustHeight(
-  el: HTMLTextAreaElement,
-  minRows: number,
-  maxRows?: number
-): void {
+function adjustHeight(el: HTMLTextAreaElement, minRows: number, maxRows?: number): void {
   // Reset to auto so shrink works correctly
   el.style.height = "auto";
 
   const lineHeight = parseFloat(getComputedStyle(el).lineHeight) || 20;
   const paddingY =
-    parseFloat(getComputedStyle(el).paddingTop) +
-    parseFloat(getComputedStyle(el).paddingBottom);
+    parseFloat(getComputedStyle(el).paddingTop) + parseFloat(getComputedStyle(el).paddingBottom);
 
   const minH = lineHeight * minRows + paddingY;
   const scrollH = el.scrollHeight;
@@ -146,7 +135,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const autoId = useId();
     const id = idProp ?? autoId;
@@ -161,7 +150,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ? props.defaultValue.length
           : typeof props.value === "number" || typeof props.defaultValue === "number"
             ? String(props.value ?? props.defaultValue).length
-            : 0
+            : 0,
     );
 
     // Internal ref for auto-resize — merges with forwarded ref
@@ -173,7 +162,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         if (typeof ref === "function") ref(el);
         else if (ref) ref.current = el;
       },
-      [ref]
+      [ref],
     );
 
     // Initial adjustment
@@ -193,7 +182,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         }
         onChange?.(e);
       },
-      [autoResize, minRows, maxRows, props.maxLength, onChange]
+      [autoResize, minRows, maxRows, props.maxLength, onChange],
     );
 
     return (
@@ -224,7 +213,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={cn(
             textareaVariants({ state, size }),
             autoResize && "resize-none overflow-hidden",
-            className
+            className,
           )}
           {...props}
         />
@@ -236,9 +225,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 id={helperId}
                 className={cn(
                   "text-[var(--text-xs)]",
-                  isError
-                    ? "text-[var(--color-error)]"
-                    : "text-[var(--color-text-secondary)]"
+                  isError ? "text-[var(--color-error)]" : "text-[var(--color-text-secondary)]",
                 )}
                 role={isError ? "alert" : undefined}
               >
@@ -246,16 +233,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               </p>
             )}
             {!helperText && <span />}
-          {props.maxLength && (
-            <span className="text-[var(--text-xs)] text-[var(--color-text-tertiary)] shrink-0 ml-auto pl-4">
-              {charCount} / {props.maxLength}
-            </span>
-          )}
+            {props.maxLength && (
+              <span className="text-[var(--text-xs)] text-[var(--color-text-tertiary)] shrink-0 ml-auto pl-4">
+                {charCount} / {props.maxLength}
+              </span>
+            )}
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Textarea.displayName = "Textarea";

@@ -1,4 +1,3 @@
-
 import { cn } from "../../utils/cn.js";
 import type {
   CardBodyProps,
@@ -21,15 +20,9 @@ const variantStyles: Record<CardVariant, string> = {
     "shadow-[var(--shadow-md)]",
   ].join(" "),
 
-  outline: [
-    "bg-transparent",
-    "border border-[var(--color-border-strong)]",
-  ].join(" "),
+  outline: ["bg-transparent", "border border-[var(--color-border-strong)]"].join(" "),
 
-  ghost: [
-    "bg-transparent",
-    "border border-transparent",
-  ].join(" "),
+  ghost: ["bg-transparent", "border border-transparent"].join(" "),
 };
 
 /**
@@ -62,7 +55,7 @@ export function Card({
           "hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)]",
           "active:translate-y-0 active:shadow-[var(--shadow-sm)]",
         ],
-        className
+        className,
       )}
       {...props}
     >
@@ -82,7 +75,7 @@ export function CardHeader({ className, children, ...props }: CardHeaderProps) {
         "flex items-start justify-between gap-4",
         "pb-4 border-b border-[var(--color-border)]",
         "mb-4",
-        className
+        className,
       )}
       {...props}
     >
@@ -114,7 +107,7 @@ export function CardFooter({ className, children, ...props }: CardFooterProps) {
         "flex items-center justify-end gap-3",
         "pt-4 border-t border-[var(--color-border)]",
         "mt-4",
-        className
+        className,
       )}
       {...props}
     >

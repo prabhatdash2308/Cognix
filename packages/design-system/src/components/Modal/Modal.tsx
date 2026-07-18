@@ -1,4 +1,3 @@
-
 import * as RadixDialog from "@radix-ui/react-dialog";
 import { cn } from "../../utils/cn.js";
 import type { ModalProps, ModalSize } from "./Modal.types.js";
@@ -24,10 +23,10 @@ function CloseIcon({ className }: { className?: string }) {
 
 /* ─── Size map ──────────────────────────────────────────────────────────── */
 const sizeStyles: Record<ModalSize, string> = {
-  sm:   "max-w-sm",
-  md:   "max-w-md",
-  lg:   "max-w-lg",
-  xl:   "max-w-xl",
+  sm: "max-w-sm",
+  md: "max-w-md",
+  lg: "max-w-lg",
+  xl: "max-w-xl",
   full: "max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]",
 };
 
@@ -62,9 +61,7 @@ export function Modal({
       {...(defaultOpen !== undefined ? { defaultOpen } : {})}
       {...(onOpenChange !== undefined ? { onOpenChange } : {})}
     >
-      {trigger && (
-        <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
-      )}
+      {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
 
       <RadixDialog.Portal>
         {/* Overlay */}
@@ -74,7 +71,7 @@ export function Modal({
             "z-[var(--z-overlay)]",
             "bg-black/60 backdrop-blur-[2px]",
             "data-[state=open]:animate-[fadeIn_var(--duration-fast)_var(--ease-out)]",
-            "data-[state=closed]:animate-[fadeOut_var(--duration-fast)_var(--ease-in)]"
+            "data-[state=closed]:animate-[fadeOut_var(--duration-fast)_var(--ease-in)]",
           )}
         />
 
@@ -97,7 +94,7 @@ export function Modal({
             // Animation
             "data-[state=open]:animate-[dialogIn_var(--duration-normal)_var(--ease-spring)]",
             "data-[state=closed]:animate-[dialogOut_var(--duration-fast)_var(--ease-in)]",
-            "focus:outline-none"
+            "focus:outline-none",
           )}
         >
           {/* Header */}
@@ -106,16 +103,14 @@ export function Modal({
               <RadixDialog.Title
                 className={cn(
                   "text-[var(--text-lg)] font-[var(--font-weight-semibold)]",
-                  "text-[var(--color-text-primary)] leading-tight"
+                  "text-[var(--color-text-primary)] leading-tight",
                 )}
               >
                 {title}
               </RadixDialog.Title>
               {description && (
                 <RadixDialog.Description
-                  className={cn(
-                    "text-[var(--text-sm)] text-[var(--color-text-secondary)]"
-                  )}
+                  className={cn("text-[var(--text-sm)] text-[var(--color-text-secondary)]")}
                 >
                   {description}
                 </RadixDialog.Description>
@@ -130,7 +125,7 @@ export function Modal({
                   "hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
                   "transition-colors duration-[var(--duration-fast)]",
                   "focus-visible:outline-none focus-visible:ring-2",
-                  "focus-visible:ring-[var(--color-border-focus)]"
+                  "focus-visible:ring-[var(--color-border-focus)]",
                 )}
                 aria-label="Close dialog"
               >
@@ -140,11 +135,7 @@ export function Modal({
           </div>
 
           {/* Body */}
-          {children && (
-            <div className="flex-1 overflow-y-auto px-6 py-5">
-              {children}
-            </div>
-          )}
+          {children && <div className="flex-1 overflow-y-auto px-6 py-5">{children}</div>}
 
           {/* Footer */}
           {footer && (

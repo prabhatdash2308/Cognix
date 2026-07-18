@@ -60,11 +60,7 @@ export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
   ({ as: _tag = "span", focusable = false, className = "", children, ...props }, ref) => {
     const Tag = _tag as React.ElementType;
 
-    const classes = [
-      visuallyHidden,
-      focusable ? visuallyHiddenFocusable : "",
-      className,
-    ]
+    const classes = [visuallyHidden, focusable ? visuallyHiddenFocusable : "", className]
       .filter(Boolean)
       .join(" ");
 
@@ -73,7 +69,7 @@ export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
         {children}
       </Tag>
     );
-  }
+  },
 );
 
 VisuallyHidden.displayName = "VisuallyHidden";

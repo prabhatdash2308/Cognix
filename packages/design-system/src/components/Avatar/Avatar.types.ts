@@ -5,8 +5,7 @@ export type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type AvatarStatus = "online" | "offline" | "busy" | "away";
 export type AvatarShape = "circle" | "square";
 
-export interface AvatarProps
-  extends ComponentPropsWithoutRef<typeof RadixAvatar.Root> {
+export interface AvatarProps extends ComponentPropsWithoutRef<typeof RadixAvatar.Root> {
   /** Image src URL */
   src?: string;
   /** Alt text for the image */

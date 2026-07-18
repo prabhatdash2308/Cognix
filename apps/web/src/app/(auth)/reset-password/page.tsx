@@ -52,15 +52,19 @@ function ResetPasswordForm(): React.ReactElement {
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.25rem" }}>
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <circle cx="24" cy="24" r="23" stroke="#34d399" strokeWidth="1.5" />
-            <path d="M14 24l7 7 14-16" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M14 24l7 7 14-16"
+              stroke="#34d399"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", margin: "0 0 0.5rem" }}>
           Password updated!
         </h1>
-        <p style={{ color: "#64748b", fontSize: "0.875rem" }}>
-          Redirecting you to sign in…
-        </p>
+        <p style={{ color: "#64748b", fontSize: "0.875rem" }}>Redirecting you to sign in…</p>
       </div>
     );
   }
@@ -68,7 +72,15 @@ function ResetPasswordForm(): React.ReactElement {
   return (
     <>
       <div style={{ marginBottom: "1.75rem" }}>
-        <h1 style={{ fontSize: "1.625rem", fontWeight: 700, color: "#f1f5f9", letterSpacing: "-0.03em", margin: "0 0 0.375rem" }}>
+        <h1
+          style={{
+            fontSize: "1.625rem",
+            fontWeight: 700,
+            color: "#f1f5f9",
+            letterSpacing: "-0.03em",
+            margin: "0 0 0.375rem",
+          }}
+        >
           Set new password
         </h1>
         <p style={{ fontSize: "0.875rem", color: "#64748b", margin: 0 }}>
@@ -78,7 +90,11 @@ function ResetPasswordForm(): React.ReactElement {
 
       {!token && (
         <div className="auth-error" role="alert" style={{ marginBottom: "1.25rem" }}>
-          Invalid reset link. <Link href="/forgot-password" style={{ color: "#818cf8" }}>Request a new one</Link>.
+          Invalid reset link.{" "}
+          <Link href="/forgot-password" style={{ color: "#818cf8" }}>
+            Request a new one
+          </Link>
+          .
         </div>
       )}
 
@@ -88,9 +104,16 @@ function ResetPasswordForm(): React.ReactElement {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.125rem" }} noValidate>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "1.125rem" }}
+        noValidate
+      >
         <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          <label htmlFor="password" style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#94a3b8" }}>
+          <label
+            htmlFor="password"
+            style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#94a3b8" }}
+          >
             New password
           </label>
           <input
@@ -107,7 +130,10 @@ function ResetPasswordForm(): React.ReactElement {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-          <label htmlFor="confirm-password" style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#94a3b8" }}>
+          <label
+            htmlFor="confirm-password"
+            style={{ fontSize: "0.8125rem", fontWeight: 500, color: "#94a3b8" }}
+          >
             Confirm password
           </label>
           <input
@@ -129,12 +155,28 @@ function ResetPasswordForm(): React.ReactElement {
           disabled={isLoading || !token}
           style={{ marginTop: "0.25rem" }}
         >
-          {isLoading ? <><span className="auth-spinner" aria-hidden /> Updating…</> : "Update password"}
+          {isLoading ? (
+            <>
+              <span className="auth-spinner" aria-hidden /> Updating…
+            </>
+          ) : (
+            "Update password"
+          )}
         </button>
       </form>
 
-      <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#475569", marginTop: "1.5rem", marginBottom: 0 }}>
-        <Link href="/sign-in" style={{ color: "#818cf8", textDecoration: "none" }}>← Back to sign in</Link>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "0.875rem",
+          color: "#475569",
+          marginTop: "1.5rem",
+          marginBottom: 0,
+        }}
+      >
+        <Link href="/sign-in" style={{ color: "#818cf8", textDecoration: "none" }}>
+          ← Back to sign in
+        </Link>
       </p>
 
       <style>{`

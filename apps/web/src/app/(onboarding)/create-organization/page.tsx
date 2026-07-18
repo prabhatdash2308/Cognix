@@ -37,7 +37,7 @@ export default function CreateOrganizationPage(): React.ReactElement {
       router.push("/create-workspace");
     } catch (err: unknown) {
       setError(
-        err instanceof Error ? err.message : "Failed to create organization. Please try again."
+        err instanceof Error ? err.message : "Failed to create organization. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -61,7 +61,16 @@ export default function CreateOrganizationPage(): React.ReactElement {
 
       {/* Icon */}
       <div className="onboard-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
@@ -72,11 +81,17 @@ export default function CreateOrganizationPage(): React.ReactElement {
         Your organization is the home for your team, projects, and AI agents.
       </p>
 
-      {error && <div className="onboard-error" role="alert">{error}</div>}
+      {error && (
+        <div className="onboard-error" role="alert">
+          {error}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="onboard-form" noValidate>
         <div className="onboard-field">
-          <label htmlFor="org-name" className="onboard-label">Organization name</label>
+          <label htmlFor="org-name" className="onboard-label">
+            Organization name
+          </label>
           <input
             id="org-name"
             type="text"
@@ -92,20 +107,22 @@ export default function CreateOrganizationPage(): React.ReactElement {
           {name && (
             <div className="onboard-slug-preview">
               <span className="onboard-slug-label">URL:</span>
-              <span className="onboard-slug-value">cognix.app/<strong>{slugPreview}</strong></span>
+              <span className="onboard-slug-value">
+                cognix.app/<strong>{slugPreview}</strong>
+              </span>
             </div>
           )}
         </div>
 
-        <button
-          type="submit"
-          className="onboard-button"
-          disabled={isLoading || !name.trim()}
-        >
+        <button type="submit" className="onboard-button" disabled={isLoading || !name.trim()}>
           {isLoading ? (
-            <><span className="onboard-spinner" aria-hidden /> Creating…</>
+            <>
+              <span className="onboard-spinner" aria-hidden /> Creating…
+            </>
           ) : (
-            <>Continue <span aria-hidden>→</span></>
+            <>
+              Continue <span aria-hidden>→</span>
+            </>
           )}
         </button>
       </form>

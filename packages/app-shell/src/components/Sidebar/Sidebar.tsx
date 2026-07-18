@@ -37,13 +37,7 @@ export interface SidebarProps {
 
 export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
   const { sidebar, nav } = useAppShell();
-  const {
-    collapsed,
-    isExpanded,
-    toggle,
-    onHoverEnter,
-    onHoverLeave,
-  } = sidebar;
+  const { collapsed, isExpanded, toggle, onHoverEnter, onHoverLeave } = sidebar;
 
   return (
     <nav
@@ -59,7 +53,7 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
         "transition-[width,min-width] duration-[var(--duration-normal)] ease-[var(--ease-in-out)]",
         "overflow-hidden",
         "z-[var(--z-sticky)]",
-        className
+        className,
       )}
       onMouseEnter={onHoverEnter}
       onMouseLeave={onHoverLeave}
@@ -68,7 +62,9 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
       <div
         className={cn(
           "flex items-center h-14 shrink-0",
-          isExpanded ? "px-3 border-b border-[var(--color-border)]" : "justify-center border-b border-[var(--color-border)] px-0"
+          isExpanded
+            ? "px-3 border-b border-[var(--color-border)]"
+            : "justify-center border-b border-[var(--color-border)] px-0",
         )}
       >
         {isExpanded ? (
@@ -82,7 +78,7 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
               "rounded-[var(--radius-lg)]",
               "hover:bg-[var(--color-surface-hover)]",
               "transition-colors duration-[var(--duration-fast)]",
-              "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]"
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
             )}
           >
             {/* Workspace initials icon */}
@@ -92,20 +88,26 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
       </div>
 
       {/* ── Navigation sections ── */}
-      <div className={cn("flex-1 overflow-y-auto overflow-x-hidden py-3", isExpanded ? "px-3" : "px-2")}>
+      <div
+        className={cn(
+          "flex-1 overflow-y-auto overflow-x-hidden py-3",
+          isExpanded ? "px-3" : "px-2",
+        )}
+      >
         <div className="space-y-4">
           {nav.map((section) => (
-            <SidebarSection
-              key={section.id}
-              section={section}
-              isExpanded={isExpanded}
-            />
+            <SidebarSection key={section.id} section={section} isExpanded={isExpanded} />
           ))}
         </div>
       </div>
 
       {/* ── Collapse Toggle ── */}
-      <div className={cn("shrink-0 border-t border-[var(--color-border)] py-3", isExpanded ? "px-3" : "px-2")}>
+      <div
+        className={cn(
+          "shrink-0 border-t border-[var(--color-border)] py-3",
+          isExpanded ? "px-3" : "px-2",
+        )}
+      >
         <button
           type="button"
           onClick={toggle}
@@ -118,7 +120,7 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
             "hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-secondary)]",
             "transition-colors duration-[var(--duration-fast)]",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
-            isExpanded ? "px-3 py-2" : "px-0 py-2 justify-center"
+            isExpanded ? "px-3 py-2" : "px-0 py-2 justify-center",
           )}
         >
           {collapsed ? (
@@ -127,9 +129,7 @@ export function Sidebar({ onCreateWorkspace, className }: SidebarProps) {
             <PanelLeftCloseIcon size={18} aria-hidden />
           )}
           {isExpanded && (
-            <span className="text-[var(--text-sm)]">
-              {collapsed ? "Expand" : "Collapse"}
-            </span>
+            <span className="text-[var(--text-sm)]">{collapsed ? "Expand" : "Collapse"}</span>
           )}
         </button>
       </div>
@@ -158,7 +158,7 @@ function WorkspaceIconOnly() {
         "flex items-center justify-center",
         "bg-[var(--color-accent)] text-white",
         "text-[var(--text-2xs)] font-[var(--font-weight-bold)]",
-        "leading-none select-none uppercase"
+        "leading-none select-none uppercase",
       )}
     >
       {currentWorkspace.initials.slice(0, 2)}

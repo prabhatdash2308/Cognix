@@ -28,8 +28,13 @@ export function useOrganizationMembers(orgId: string) {
 export function useUpdateOrganization() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ orgId, data }: { orgId: string; data: { name?: string; slug?: string; logo_url?: string } }) =>
-      getClient().organizations.update(orgId, data),
+    mutationFn: ({
+      orgId,
+      data,
+    }: {
+      orgId: string;
+      data: { name?: string; slug?: string; logo_url?: string };
+    }) => getClient().organizations.update(orgId, data),
     onSuccess: (updatedOrg) => {
       queryClient.setQueryData(["organization", updatedOrg.id], updatedOrg);
     },

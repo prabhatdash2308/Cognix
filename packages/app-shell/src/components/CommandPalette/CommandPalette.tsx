@@ -29,8 +29,7 @@ function filterGroups(groups: CommandGroup[], query: string): CommandGroup[] {
       ...g,
       items: g.items.filter(
         (item) =>
-          item.label.toLowerCase().includes(q) ||
-          item.description?.toLowerCase().includes(q)
+          item.label.toLowerCase().includes(q) || item.description?.toLowerCase().includes(q),
       ),
     }))
     .filter((g) => g.items.length > 0);
@@ -62,14 +61,11 @@ function CommandItemRow({
         "focus:outline-none",
         isActive
           ? "bg-[var(--color-accent-subtle)] text-[var(--color-text-primary)]"
-          : "text-[var(--color-text-primary)] hover:bg-[var(--color-surface-hover)]"
+          : "text-[var(--color-text-primary)] hover:bg-[var(--color-surface-hover)]",
       )}
     >
       {item.icon && (
-        <span
-          className="shrink-0 text-[var(--color-text-secondary)]"
-          aria-hidden
-        >
+        <span className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
           {item.icon}
         </span>
       )}
@@ -97,7 +93,7 @@ function CommandItemRow({
                 "border border-[var(--color-border)]",
                 "bg-[var(--color-surface)]",
                 "text-[var(--text-2xs)] font-[var(--font-weight-medium)]",
-                "text-[var(--color-text-tertiary)] leading-none"
+                "text-[var(--color-text-tertiary)] leading-none",
               )}
             >
               {key}
@@ -117,33 +113,31 @@ export interface CommandPaletteProps {
 
 export function CommandPalette({ className }: CommandPaletteProps) {
   const { commandPalette, commandGroups } = useAppShell();
-  const { isOpen, query, activeIndex, close, setQuery, inputRef } =
-    commandPalette;
+  const { isOpen, query, activeIndex, close, setQuery, inputRef } = commandPalette;
 
   // Build flat list for index mapping
-  const filteredGroups = useMemo(
-    () => filterGroups(commandGroups, query),
-    [commandGroups, query]
-  );
+  const filteredGroups = useMemo(() => filterGroups(commandGroups, query), [commandGroups, query]);
 
-  const flatItems = useMemo(
-    () => filteredGroups.flatMap((g) => g.items),
-    [filteredGroups]
-  );
+  const flatItems = useMemo(() => filteredGroups.flatMap((g) => g.items), [filteredGroups]);
 
   const handleSelect = useCallback(
     (item: CommandItem) => {
       item.onSelect();
       close();
     },
-    [close]
+    [close],
   );
 
   // Map flat index to item
   let flatIndex = 0;
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(open) => { if (!open) close(); }}>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) close();
+      }}
+    >
       <Dialog.Portal>
         {/* Backdrop */}
         <Dialog.Overlay
@@ -151,7 +145,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
             "fixed inset-0 z-[var(--z-modal)]",
             "bg-black/50 backdrop-blur-sm",
             "animate-in fade-in-0",
-            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0",
           )}
         />
 
@@ -162,7 +156,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
             "z-[var(--z-modal)] w-full max-w-[560px] mx-auto px-4",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-            className
+            className,
           )}
           aria-label="Command palette"
           onKeyDown={(e) => {
@@ -189,7 +183,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
               "border border-[var(--color-border)]",
               "bg-[var(--color-surface-raised)]",
               "shadow-[var(--shadow-2xl)]",
-              "overflow-hidden"
+              "overflow-hidden",
             )}
           >
             {/* Search input */}
@@ -207,9 +201,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
                 aria-expanded={isOpen}
                 aria-controls="cmd-results"
                 aria-activedescendant={
-                  activeIndex >= 0
-                    ? `cmd-item-${flatItems[activeIndex]?.id ?? ""}`
-                    : undefined
+                  activeIndex >= 0 ? `cmd-item-${flatItems[activeIndex]?.id ?? ""}` : undefined
                 }
                 placeholder="Search commands…"
                 value={query}
@@ -218,7 +210,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
                   "flex-1 h-12 bg-transparent",
                   "text-[var(--text-base)] text-[var(--color-text-primary)]",
                   "placeholder:text-[var(--color-text-tertiary)]",
-                  "outline-none border-0 ring-0"
+                  "outline-none border-0 ring-0",
                 )}
               />
               <kbd
@@ -228,7 +220,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
                   "rounded-[var(--radius-md)]",
                   "border border-[var(--color-border)]",
                   "bg-[var(--color-surface)]",
-                  "text-[var(--text-xs)] text-[var(--color-text-tertiary)]"
+                  "text-[var(--text-xs)] text-[var(--color-text-tertiary)]",
                 )}
                 aria-hidden
               >
@@ -247,9 +239,7 @@ export function CommandPalette({ className }: CommandPaletteProps) {
                 <div className="flex flex-col items-center justify-center py-12 text-[var(--color-text-tertiary)]">
                   <SearchIcon size={24} className="mb-3 opacity-40" aria-hidden />
                   <p className="text-[var(--text-sm)]">No results found</p>
-                  <p className="text-[var(--text-xs)] mt-1">
-                    Try a different search term
-                  </p>
+                  <p className="text-[var(--text-xs)] mt-1">Try a different search term</p>
                 </div>
               ) : (
                 filteredGroups.map((group) => (
@@ -278,15 +268,30 @@ export function CommandPalette({ className }: CommandPaletteProps) {
             {/* Footer hint */}
             <div className="border-t border-[var(--color-border)] px-4 py-2 flex items-center gap-4">
               <span className="flex items-center gap-1.5 text-[var(--text-xs)] text-[var(--color-text-tertiary)]">
-                <kbd className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]" aria-hidden>↑↓</kbd>
+                <kbd
+                  className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]"
+                  aria-hidden
+                >
+                  ↑↓
+                </kbd>
                 Navigate
               </span>
               <span className="flex items-center gap-1.5 text-[var(--text-xs)] text-[var(--color-text-tertiary)]">
-                <kbd className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]" aria-hidden>↵</kbd>
+                <kbd
+                  className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]"
+                  aria-hidden
+                >
+                  ↵
+                </kbd>
                 Select
               </span>
               <span className="flex items-center gap-1.5 text-[var(--text-xs)] text-[var(--color-text-tertiary)]">
-                <kbd className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]" aria-hidden>Esc</kbd>
+                <kbd
+                  className="flex items-center justify-center h-5 min-w-[20px] px-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--text-2xs)]"
+                  aria-hidden
+                >
+                  Esc
+                </kbd>
                 Close
               </span>
             </div>

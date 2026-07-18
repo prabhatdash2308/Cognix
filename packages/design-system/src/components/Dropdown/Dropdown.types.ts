@@ -34,10 +34,7 @@ export interface DropdownCheckboxItem {
 }
 
 export type DropdownMenuItem =
-  | DropdownItemBase
-  | DropdownSeparator
-  | DropdownLabel
-  | DropdownCheckboxItem;
+  DropdownItemBase | DropdownSeparator | DropdownLabel | DropdownCheckboxItem;
 
 export type DropdownAlign = "start" | "center" | "end";
 export type DropdownSide = "top" | "right" | "bottom" | "left";

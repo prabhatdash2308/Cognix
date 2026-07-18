@@ -31,7 +31,12 @@ export function MobileNavigation({
   const { mobileNav, nav, currentWorkspace } = useAppShell();
 
   return (
-    <Dialog.Root open={mobileNav.isOpen} onOpenChange={(open) => { if (!open) mobileNav.close(); }}>
+    <Dialog.Root
+      open={mobileNav.isOpen}
+      onOpenChange={(open) => {
+        if (!open) mobileNav.close();
+      }}
+    >
       <Dialog.Portal>
         {/* Backdrop */}
         <Dialog.Overlay
@@ -39,7 +44,7 @@ export function MobileNavigation({
             "fixed inset-0 z-[var(--z-overlay)]",
             "bg-black/60 backdrop-blur-sm",
             "animate-in fade-in-0",
-            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-0",
           )}
         />
 
@@ -56,7 +61,7 @@ export function MobileNavigation({
             "animate-in slide-in-from-left-full duration-[var(--duration-normal)]",
             "data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left-full",
             "focus:outline-none",
-            className
+            className,
           )}
         >
           <VisuallyHidden.Root>
@@ -80,7 +85,7 @@ export function MobileNavigation({
                     "flex items-center justify-center",
                     "bg-[var(--color-accent)] text-white",
                     "text-[var(--text-2xs)] font-[var(--font-weight-bold)]",
-                    "uppercase leading-none"
+                    "uppercase leading-none",
                   )}
                 >
                   {currentWorkspace.initials.slice(0, 2)}
@@ -101,7 +106,7 @@ export function MobileNavigation({
                   "text-[var(--color-text-tertiary)]",
                   "hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
                   "transition-colors duration-[var(--duration-fast)]",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]"
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
                 )}
               >
                 <XIcon size={18} aria-hidden />
@@ -110,17 +115,10 @@ export function MobileNavigation({
           </div>
 
           {/* Nav sections */}
-          <nav
-            aria-label="Mobile navigation"
-            className="flex-1 overflow-y-auto px-3 py-3"
-          >
+          <nav aria-label="Mobile navigation" className="flex-1 overflow-y-auto px-3 py-3">
             <div className="space-y-4">
               {nav.map((section) => (
-                <SidebarSection
-                  key={section.id}
-                  section={section}
-                  isExpanded={true}
-                />
+                <SidebarSection key={section.id} section={section} isExpanded={true} />
               ))}
             </div>
           </nav>

@@ -102,29 +102,25 @@ const badgeVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 /* ─── Dot variants ───────────────────────────────────────────────────────── */
 
-const dotVariants: Record<
-  NonNullable<VariantProps<typeof badgeVariants>["variant"]>,
-  string
-> = {
-  default:     "bg-[var(--color-text-tertiary)]",
-  primary:     "bg-[var(--color-accent)]",
-  success:     "bg-[var(--color-success)]",
-  warning:     "bg-[var(--color-warning)]",
-  error:       "bg-[var(--color-error)]",
-  info:        "bg-[var(--color-info)]",
-  outline:     "bg-[var(--color-text-tertiary)]",
+const dotVariants: Record<NonNullable<VariantProps<typeof badgeVariants>["variant"]>, string> = {
+  default: "bg-[var(--color-text-tertiary)]",
+  primary: "bg-[var(--color-accent)]",
+  success: "bg-[var(--color-success)]",
+  warning: "bg-[var(--color-warning)]",
+  error: "bg-[var(--color-error)]",
+  info: "bg-[var(--color-info)]",
+  outline: "bg-[var(--color-text-tertiary)]",
 };
 
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 export interface BadgeProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {
+  extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
   /** Render a colored dot indicator before the label. @default false */
   dot?: boolean;
 }
@@ -136,25 +132,21 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     const resolvedVariant = variant ?? "default";
 
     return (
-      <span
-        ref={ref}
-        className={cn(badgeVariants({ variant, size }), className)}
-        {...props}
-      >
+      <span ref={ref} className={cn(badgeVariants({ variant, size }), className)} {...props}>
         {dot && (
           <span
             aria-hidden
             className={cn(
               "inline-block rounded-full shrink-0",
               size === "lg" ? "size-2" : "size-1.5",
-              dotVariants[resolvedVariant]
+              dotVariants[resolvedVariant],
             )}
           />
         )}
         {children}
       </span>
     );
-  }
+  },
 );
 
 Badge.displayName = "Badge";

@@ -32,13 +32,7 @@ export interface SidebarItemProps {
 
 /* ─── Sub-item ───────────────────────────────────────────────────────────── */
 
-function SubItem({
-  item,
-  isExpanded,
-}: {
-  item: NavItem;
-  isExpanded: boolean;
-}) {
+function SubItem({ item, isExpanded }: { item: NavItem; isExpanded: boolean }) {
   if (!isExpanded) return null;
   return (
     <a
@@ -51,7 +45,7 @@ function SubItem({
         item.isActive
           ? "text-[var(--color-accent)] bg-[var(--color-accent-subtle)] font-[var(--font-weight-medium)]"
           : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]"
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
       )}
     >
       <span className="truncate">{item.label}</span>
@@ -74,9 +68,7 @@ export const SidebarItem = memo(function SidebarItem({
   isExpanded,
   depth = 0,
 }: SidebarItemProps) {
-  const [childrenOpen, setChildrenOpen] = useState(
-    item.children?.some((c) => c.isActive) ?? false
-  );
+  const [childrenOpen, setChildrenOpen] = useState(item.children?.some((c) => c.isActive) ?? false);
 
   const hasChildren = (item.children?.length ?? 0) > 0;
   const isTopLevel = depth === 0;
@@ -85,7 +77,7 @@ export const SidebarItem = memo(function SidebarItem({
     <span
       className={cn(
         "flex items-center gap-3 flex-1 min-w-0",
-        !isExpanded && isTopLevel && "justify-center"
+        !isExpanded && isTopLevel && "justify-center",
       )}
     >
       {/* Icon */}
@@ -93,9 +85,7 @@ export const SidebarItem = memo(function SidebarItem({
         className={cn(
           "shrink-0 flex items-center justify-center",
           "size-[18px]",
-          item.isActive
-            ? "text-[var(--color-accent)]"
-            : "text-[var(--color-text-secondary)]"
+          item.isActive ? "text-[var(--color-accent)]" : "text-[var(--color-text-secondary)]",
         )}
         aria-hidden
       >
@@ -105,9 +95,7 @@ export const SidebarItem = memo(function SidebarItem({
       {/* Label + badge — hidden when collapsed */}
       {isExpanded && (
         <>
-          <span className="flex-1 truncate text-[var(--text-sm)]">
-            {item.label}
-          </span>
+          <span className="flex-1 truncate text-[var(--text-sm)]">{item.label}</span>
           {item.badge !== undefined && item.badge > 0 && (
             <span
               aria-label={`${item.badge} items`}
@@ -118,7 +106,7 @@ export const SidebarItem = memo(function SidebarItem({
                 "text-[var(--text-2xs)] font-[var(--font-weight-medium)]",
                 item.isActive
                   ? "bg-[var(--color-accent)] text-white"
-                  : "bg-[var(--color-surface-active)] text-[var(--color-text-secondary)]"
+                  : "bg-[var(--color-surface-active)] text-[var(--color-text-secondary)]",
               )}
             >
               {item.badge > 99 ? "99+" : item.badge}
@@ -129,7 +117,7 @@ export const SidebarItem = memo(function SidebarItem({
               size={14}
               className={cn(
                 "shrink-0 text-[var(--color-text-tertiary)] transition-transform duration-[var(--duration-fast)]",
-                childrenOpen && "rotate-90"
+                childrenOpen && "rotate-90",
               )}
               aria-hidden
             />
@@ -147,7 +135,7 @@ export const SidebarItem = memo(function SidebarItem({
     isExpanded ? "px-3 py-2" : "px-0 py-2 w-full justify-center",
     item.isActive
       ? "bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"
-      : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]"
+      : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
   );
 
   const node = hasChildren ? (
@@ -165,11 +153,7 @@ export const SidebarItem = memo(function SidebarItem({
       {itemContent}
     </button>
   ) : (
-    <a
-      href={item.href}
-      aria-current={item.isActive ? "page" : undefined}
-      className={linkClass}
-    >
+    <a href={item.href} aria-current={item.isActive ? "page" : undefined} className={linkClass}>
       {itemContent}
     </a>
   );
@@ -191,14 +175,12 @@ export const SidebarItem = memo(function SidebarItem({
                 "text-[var(--text-xs)] font-[var(--font-weight-medium)]",
                 "shadow-[var(--shadow-md)]",
                 "animate-in fade-in-0 zoom-in-95",
-                "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+                "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
               )}
             >
               {item.label}
               {item.badge !== undefined && item.badge > 0 && (
-                <span className="ml-1.5 text-[var(--color-neutral-400)]">
-                  {item.badge}
-                </span>
+                <span className="ml-1.5 text-[var(--color-neutral-400)]">{item.badge}</span>
               )}
               <Tooltip.Arrow className="fill-[var(--color-neutral-900)]" />
             </Tooltip.Content>

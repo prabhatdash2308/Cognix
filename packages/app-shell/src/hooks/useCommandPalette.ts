@@ -40,9 +40,7 @@ export interface UseCommandPaletteReturn {
 
 /* ─── Hook ───────────────────────────────────────────────────────────────── */
 
-export function useCommandPalette(
-  options: UseCommandPaletteOptions = {}
-): UseCommandPaletteReturn {
+export function useCommandPalette(options: UseCommandPaletteOptions = {}): UseCommandPaletteReturn {
   const { itemCount = 0, onSelect } = options;
 
   const [isOpen, setIsOpen] = useState(false);

@@ -28,12 +28,7 @@ export interface TopBarProps {
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
 
-export function TopBar({
-  className,
-  onProfile,
-  onSettings,
-  onSignOut,
-}: TopBarProps) {
+export function TopBar({ className, onProfile, onSettings, onSignOut }: TopBarProps) {
   const { mobileNav, breadcrumbs } = useAppShell();
 
   return (
@@ -45,7 +40,7 @@ export function TopBar({
         "h-14 px-4",
         "bg-[var(--color-surface)]/80 backdrop-blur-md",
         "border-b border-[var(--color-border)]",
-        className
+        className,
       )}
     >
       <div className="flex items-center gap-4 min-w-0">
@@ -61,7 +56,7 @@ export function TopBar({
             "text-[var(--color-text-secondary)]",
             "hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-text-primary)]",
             "transition-colors duration-[var(--duration-fast)]",
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]"
+            "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
           )}
         >
           <MenuIcon size={20} aria-hidden />

@@ -1,4 +1,3 @@
-
 import * as RadixTooltip from "@radix-ui/react-tooltip";
 import { cn } from "../../utils/cn.js";
 import type { TooltipProps } from "./Tooltip.types.js";
@@ -59,15 +58,11 @@ export function Tooltip({
               "data-[state=delayed-open]:data-[side=bottom]:animate-[slideUpAndFade_var(--duration-fast)_var(--ease-out)]",
               "data-[state=delayed-open]:data-[side=left]:animate-[slideRightAndFade_var(--duration-fast)_var(--ease-out)]",
               "data-[state=delayed-open]:data-[side=right]:animate-[slideLeftAndFade_var(--duration-fast)_var(--ease-out)]",
-              contentClassName
+              contentClassName,
             )}
           >
             {content}
-            <RadixTooltip.Arrow
-              className="fill-[var(--color-neutral-800)]"
-              width={10}
-              height={5}
-            />
+            <RadixTooltip.Arrow className="fill-[var(--color-neutral-800)]" width={10} height={5} />
           </RadixTooltip.Content>
         </RadixTooltip.Portal>
       </RadixTooltip.Root>

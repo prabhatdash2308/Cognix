@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import type { User } from "@cognix/types";
 import { apiClient, createAuthClient } from "@/lib/api-client";
 import {
@@ -86,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }): React.React
       const me = await client.auth.me();
       setUser(me);
     },
-    []
+    [],
   );
 
   const signOut = useCallback(async (): Promise<void> => {
@@ -112,7 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }): React.React
       const me = await client.auth.me();
       setUser(me);
     },
-    []
+    [],
   );
 
   return (

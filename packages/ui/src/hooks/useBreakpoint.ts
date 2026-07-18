@@ -33,10 +33,10 @@ import { useMediaQuery } from "./useMediaQuery.js";
 
 /** Tailwind-compatible breakpoint definitions */
 export const breakpoints = {
-  sm:  "640px",
-  md:  "768px",
-  lg:  "1024px",
-  xl:  "1280px",
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
   "2xl": "1536px",
 } as const;
 
@@ -60,10 +60,10 @@ export interface BreakpointState {
  * A flag is `true` when the viewport width is at or above that breakpoint.
  */
 export function useBreakpoint(): BreakpointState {
-  const sm  = useMediaQuery(`(min-width: ${breakpoints.sm})`);
-  const md  = useMediaQuery(`(min-width: ${breakpoints.md})`);
-  const lg  = useMediaQuery(`(min-width: ${breakpoints.lg})`);
-  const xl  = useMediaQuery(`(min-width: ${breakpoints.xl})`);
+  const sm = useMediaQuery(`(min-width: ${breakpoints.sm})`);
+  const md = useMediaQuery(`(min-width: ${breakpoints.md})`);
+  const lg = useMediaQuery(`(min-width: ${breakpoints.lg})`);
+  const xl = useMediaQuery(`(min-width: ${breakpoints.xl})`);
   const xxl = useMediaQuery(`(min-width: ${breakpoints["2xl"]})`);
 
   return { sm, md, lg, xl, "2xl": xxl };

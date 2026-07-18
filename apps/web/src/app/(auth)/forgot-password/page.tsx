@@ -31,15 +31,25 @@ export default function ForgotPasswordPage(): React.ReactElement {
           <div className="auth-success-icon" aria-hidden>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
               <circle cx="16" cy="16" r="15" stroke="#34d399" strokeWidth="1.5" />
-              <path d="M10 16l4.5 4.5L22 11" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M10 16l4.5 4.5L22 11"
+                stroke="#34d399"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
           <h1 className="auth-title">Check your inbox</h1>
           <p className="auth-subtitle">
-            If <strong>{email}</strong> has an account, we&apos;ve sent a reset link.
-            Check your spam folder if you don&apos;t see it.
+            If <strong>{email}</strong> has an account, we&apos;ve sent a reset link. Check your
+            spam folder if you don&apos;t see it.
           </p>
-          <Link href="/sign-in" className="auth-button auth-button--secondary auth-button--block" style={{ textDecoration: "none", marginTop: "1.5rem", display: "flex" }}>
+          <Link
+            href="/sign-in"
+            className="auth-button auth-button--secondary auth-button--block"
+            style={{ textDecoration: "none", marginTop: "1.5rem", display: "flex" }}
+          >
             ← Back to sign in
           </Link>
         </div>
@@ -52,18 +62,20 @@ export default function ForgotPasswordPage(): React.ReactElement {
     <>
       <div className="auth-form-header">
         <h1 className="auth-title">Reset your password</h1>
-        <p className="auth-subtitle">
-          Enter your email and we&apos;ll send a reset link
-        </p>
+        <p className="auth-subtitle">Enter your email and we&apos;ll send a reset link</p>
       </div>
 
       {error && (
-        <div className="auth-error" role="alert">{error}</div>
+        <div className="auth-error" role="alert">
+          {error}
+        </div>
       )}
 
       <form onSubmit={handleSubmit} className="auth-form" noValidate>
         <div className="auth-field">
-          <label htmlFor="email" className="auth-label">Email address</label>
+          <label htmlFor="email" className="auth-label">
+            Email address
+          </label>
           <input
             id="email"
             type="email"
@@ -77,17 +89,21 @@ export default function ForgotPasswordPage(): React.ReactElement {
           />
         </div>
 
-        <button
-          type="submit"
-          className="auth-button auth-button--primary"
-          disabled={isLoading}
-        >
-          {isLoading ? <><span className="auth-spinner" aria-hidden /> Sending…</> : "Send reset link"}
+        <button type="submit" className="auth-button auth-button--primary" disabled={isLoading}>
+          {isLoading ? (
+            <>
+              <span className="auth-spinner" aria-hidden /> Sending…
+            </>
+          ) : (
+            "Send reset link"
+          )}
         </button>
       </form>
 
       <p className="auth-footer-text">
-        <Link href="/sign-in" className="auth-link">← Back to sign in</Link>
+        <Link href="/sign-in" className="auth-link">
+          ← Back to sign in
+        </Link>
       </p>
 
       <FormStyles />

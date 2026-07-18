@@ -1,12 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "ghost"
-  | "outline"
-  | "destructive"
-  | "link";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "destructive" | "link";
 
 export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 

@@ -28,8 +28,13 @@ export function useWorkspaceMembers(workspaceId: string) {
 export function useUpdateWorkspace() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ workspaceId, data }: { workspaceId: string; data: { name?: string; description?: string } }) =>
-      getClient().workspaces.update(workspaceId, data),
+    mutationFn: ({
+      workspaceId,
+      data,
+    }: {
+      workspaceId: string;
+      data: { name?: string; description?: string };
+    }) => getClient().workspaces.update(workspaceId, data),
     onSuccess: (updatedWorkspace) => {
       queryClient.setQueryData(["workspace", updatedWorkspace.id], updatedWorkspace);
     },

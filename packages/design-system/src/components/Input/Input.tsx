@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const autoId = useId();
     const id = idProp ?? autoId;
@@ -58,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               "text-[var(--text-sm)] font-[var(--font-weight-medium)]",
               "text-[var(--color-text-primary)]",
-              disabled && "opacity-50"
+              disabled && "opacity-50",
             )}
           >
             {label}
@@ -79,7 +79,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               ? "border-[var(--color-error)] focus-within:border-[var(--color-error)] focus-within:shadow-[0_0_0_1px_var(--color-error)]"
               : "border-[var(--color-border)]",
             disabled && "opacity-50 pointer-events-none",
-            wrapper
+            wrapper,
           )}
         >
           {/* Start adornment */}
@@ -97,9 +97,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             disabled={disabled}
             aria-invalid={hasError}
-            aria-describedby={
-              error ? errorId : helperText ? helperId : undefined
-            }
+            aria-describedby={error ? errorId : helperText ? helperId : undefined}
             className={cn(
               "w-full h-full bg-transparent",
               "text-[var(--color-text-primary)]",
@@ -107,7 +105,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               "focus:outline-none",
               input,
               startAdornment && "pl-9",
-              endAdornment && "pr-9"
+              endAdornment && "pr-9",
             )}
             {...props}
           />
@@ -125,24 +123,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {/* Helper / Error text */}
         {error ? (
-          <p
-            id={errorId}
-            role="alert"
-            className="text-[var(--text-xs)] text-[var(--color-error)]"
-          >
+          <p id={errorId} role="alert" className="text-[var(--text-xs)] text-[var(--color-error)]">
             {error}
           </p>
         ) : helperText ? (
-          <p
-            id={helperId}
-            className="text-[var(--text-xs)] text-[var(--color-text-tertiary)]"
-          >
+          <p id={helperId} className="text-[var(--text-xs)] text-[var(--color-text-tertiary)]">
             {helperText}
           </p>
         ) : null}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

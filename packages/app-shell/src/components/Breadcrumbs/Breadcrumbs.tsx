@@ -37,10 +37,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           const isLast = index === items.length - 1;
 
           return (
-            <li
-              key={`${item.label}-${index}`}
-              className="flex items-center gap-1 min-w-0"
-            >
+            <li key={`${item.label}-${index}`} className="flex items-center gap-1 min-w-0">
               {isLast ? (
                 <span
                   className="font-[var(--font-weight-medium)] text-[var(--color-text-primary)] truncate max-w-[200px]"
@@ -58,7 +55,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                         "hover:text-[var(--color-text-primary)]",
                         "transition-colors duration-[var(--duration-fast)]",
                         "truncate max-w-[160px]",
-                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] rounded-[var(--radius-sm)]"
+                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] rounded-[var(--radius-sm)]",
                       )}
                     >
                       {item.label}
