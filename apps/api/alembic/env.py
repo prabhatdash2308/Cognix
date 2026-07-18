@@ -22,6 +22,7 @@ target_metadata = Base.metadata
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+
 def get_url() -> str:
     return get_settings().database_url
 

@@ -20,9 +20,7 @@ async def test_get_preferences_creates_defaults(
     assert prefs["sidebar_collapsed"] is False
 
 
-async def test_update_preferences(
-    client: AsyncClient, auth_headers: dict[str, str]
-) -> None:
+async def test_update_preferences(client: AsyncClient, auth_headers: dict[str, str]) -> None:
     resp = await client.patch(
         "/api/v1/preferences/me",
         json={"theme": "dark", "language": "es", "sidebar_collapsed": True},
@@ -35,9 +33,7 @@ async def test_update_preferences(
     assert prefs["sidebar_collapsed"] is True
 
 
-async def test_invalid_theme(
-    client: AsyncClient, auth_headers: dict[str, str]
-) -> None:
+async def test_invalid_theme(client: AsyncClient, auth_headers: dict[str, str]) -> None:
     resp = await client.patch(
         "/api/v1/preferences/me",
         json={"theme": "neon"},
@@ -46,9 +42,7 @@ async def test_invalid_theme(
     assert resp.status_code == 422
 
 
-async def test_update_notification_prefs(
-    client: AsyncClient, auth_headers: dict[str, str]
-) -> None:
+async def test_update_notification_prefs(client: AsyncClient, auth_headers: dict[str, str]) -> None:
     prefs = {"email_mentions": True, "email_assignments": False, "push_all": True}
     resp = await client.patch(
         "/api/v1/preferences/me",

@@ -47,9 +47,7 @@ class OrganizationService:
 
     async def get(self, org_id: str) -> Organization:
         result = await self._db.execute(
-            select(Organization).where(
-                Organization.id == org_id, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.id == org_id, Organization.deleted_at.is_(None))
         )
         org = result.scalar_one_or_none()
         if org is None:
@@ -58,9 +56,7 @@ class OrganizationService:
 
     async def get_by_slug(self, slug: str) -> Organization:
         result = await self._db.execute(
-            select(Organization).where(
-                Organization.slug == slug, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.slug == slug, Organization.deleted_at.is_(None))
         )
         org = result.scalar_one_or_none()
         if org is None:
@@ -124,9 +120,7 @@ class OrganizationService:
 
     async def _assert_slug_free(self, slug: str) -> None:
         result = await self._db.execute(
-            select(Organization).where(
-                Organization.slug == slug, Organization.deleted_at.is_(None)
-            )
+            select(Organization).where(Organization.slug == slug, Organization.deleted_at.is_(None))
         )
         if result.scalar_one_or_none() is not None:
             raise SlugAlreadyTakenError("organization slug")

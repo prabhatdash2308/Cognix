@@ -20,9 +20,7 @@ async def test_create_organization(client: AsyncClient, auth_headers: dict[str, 
     assert org["slug"] == "acme-corp"
 
 
-async def test_create_org_duplicate_slug(
-    client: AsyncClient, auth_headers: dict[str, str]
-) -> None:
+async def test_create_org_duplicate_slug(client: AsyncClient, auth_headers: dict[str, str]) -> None:
     await client.post("/api/v1/organizations/", json={"name": "Dup Org"}, headers=auth_headers)
     resp = await client.post(
         "/api/v1/organizations/", json={"name": "Dup Org"}, headers=auth_headers

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ThemeProvider — manages light / dark / system theme for the Cognix UI.
  *
@@ -20,14 +22,7 @@
  *   const { theme, resolvedTheme, setTheme } = useTheme();
  */
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 /* ─── Types ─────────────────────────────────────────────────────────────── */
@@ -77,9 +72,7 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function getSystemTheme(): ResolvedTheme {
   if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function getStoredTheme(key: string): ThemePreference | undefined {
@@ -140,8 +133,7 @@ export function ThemeProvider({
     return () => media.removeEventListener("change", handler);
   }, []);
 
-  const resolvedTheme: ResolvedTheme =
-    theme === "system" ? systemTheme : theme;
+  const resolvedTheme: ResolvedTheme = theme === "system" ? systemTheme : theme;
 
   // Apply to <html> whenever resolved theme changes
   useEffect(() => {
@@ -153,17 +145,15 @@ export function ThemeProvider({
       storeTheme(storageKey, next);
       setThemeState(next);
     },
-    [storageKey]
+    [storageKey],
   );
 
   const value = useMemo<ThemeContextValue>(
     () => ({ theme, resolvedTheme, setTheme, themes: THEMES }),
-    [theme, resolvedTheme, setTheme]
+    [theme, resolvedTheme, setTheme],
   );
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 ThemeProvider.displayName = "ThemeProvider";

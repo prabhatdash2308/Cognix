@@ -39,6 +39,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
     # Shutdown
     from app.core.redis import close_redis_pool
+
     await close_redis_pool()
     logger.info("Cognix API shutdown complete.")
 

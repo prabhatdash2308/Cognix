@@ -34,10 +34,13 @@ class Session(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     @property
     def is_active(self) -> bool:
         from datetime import datetime
+
         now = datetime.now(UTC).replace(tzinfo=None)
-        
+
         # Ensure self.expires_at is naive for comparison
-        expires_at = self.expires_at.replace(tzinfo=None) if self.expires_at.tzinfo else self.expires_at
+        expires_at = (
+            self.expires_at.replace(tzinfo=None) if self.expires_at.tzinfo else self.expires_at
+        )
         return self.revoked_at is None and expires_at > now
 
     def __repr__(self) -> str:

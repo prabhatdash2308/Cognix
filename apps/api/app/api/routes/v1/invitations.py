@@ -64,10 +64,12 @@ async def reject_invitation(
     from sqlalchemy import select
 
     from app.models.invitation import Invitation as InvModel
+
     result = await db.execute(select(InvModel).where(InvModel.id == invitation_id))
     inv = result.scalar_one_or_none()
     if inv is None:
         from app.core.exceptions import NotFoundError
+
         raise NotFoundError("Invitation")
     await InvitationService(db).reject(inv.token, user)
 

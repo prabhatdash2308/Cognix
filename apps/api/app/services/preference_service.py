@@ -13,9 +13,7 @@ class PreferenceService:
         self._db = db
 
     async def get_or_create(self, user_id: str) -> Preference:
-        result = await self._db.execute(
-            select(Preference).where(Preference.user_id == user_id)
-        )
+        result = await self._db.execute(select(Preference).where(Preference.user_id == user_id))
         pref = result.scalar_one_or_none()
         if pref is None:
             pref = Preference(user_id=user_id)

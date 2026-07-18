@@ -37,7 +37,7 @@ async def get_current_user(
     try:
         payload = decode_access_token(credentials.credentials)
     except JWTError:
-        raise InvalidTokenError()
+        raise InvalidTokenError() from None
 
     user_id: str = payload["sub"]
     result = await db.execute(select(User).where(User.id == user_id, User.deleted_at.is_(None)))
@@ -90,6 +90,7 @@ def require_permission(permission_key: str):  # type: ignore[no-untyped-def]
     Note: This simplified version checks the user's org role in the first org
     they belong to. For workspace-level RBAC inject the workspace_id explicitly.
     """
+
     async def _check(
         user: CurrentUser,
         db: Annotated[AsyncSession, Depends(get_db)],
@@ -115,14 +116,14 @@ def require_org_member(role_names: list[str] | None = None):  # type: ignore[no-
     Optionally validates that their role name is one of *role_names*.
     The ``org_id`` must be a path parameter in the route.
     """
+
     async def _check(
         org_id: str,
         user: CurrentUser,
         db: Annotated[AsyncSession, Depends(get_db)],
     ) -> OrganizationMember:
         result = await db.execute(
-            select(OrganizationMember)
-            .where(
+            select(OrganizationMember).where(
                 OrganizationMember.organization_id == org_id,
                 OrganizationMember.user_id == user.id,
             )

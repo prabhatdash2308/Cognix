@@ -17,6 +17,7 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[settings.rate_lim
 def configure_rate_limiting(app: object) -> None:  # type: ignore[type-arg]
     """Attach SlowAPI middleware and exception handler to the FastAPI *app*."""
     from fastapi import FastAPI
+
     assert isinstance(app, FastAPI)
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)  # type: ignore[arg-type]

@@ -42,9 +42,7 @@ async def db_engine() -> AsyncGenerator[Any, None]:
 
 @pytest_asyncio.fixture(scope="function")
 async def db_session(db_engine: Any) -> AsyncGenerator[AsyncSession, None]:
-    session_factory = async_sessionmaker(
-        bind=db_engine, expire_on_commit=False, autoflush=False
-    )
+    session_factory = async_sessionmaker(bind=db_engine, expire_on_commit=False, autoflush=False)
     async with session_factory() as session:
         yield session
         await session.rollback()
@@ -53,6 +51,7 @@ async def db_session(db_engine: Any) -> AsyncGenerator[AsyncSession, None]:
 @pytest_asyncio.fixture(scope="function")
 async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
     """HTTP test client with DB dependency overridden to use test session."""
+
     async def override_get_db() -> AsyncGenerator[AsyncSession, None]:
         try:
             yield db_session
@@ -70,10 +69,12 @@ async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
 
 # ── Domain-level fixtures ─────────────────────────────────────────────────────
 
+
 @pytest_asyncio.fixture
 async def seeded_roles(db_session: AsyncSession) -> None:
     """Seed system RBAC roles before tests that need them."""
     from app.services.rbac_service import RBACService
+
     await RBACService(db_session).seed_system_roles()
     await db_session.flush()
 
@@ -81,11 +82,14 @@ async def seeded_roles(db_session: AsyncSession) -> None:
 @pytest_asyncio.fixture
 async def registered_user(client: AsyncClient, seeded_roles: None) -> dict[str, Any]:
     """Register a test user and return the token response + user info."""
-    resp = await client.post("/api/v1/auth/register", json={
-        "email": "test@example.com",
-        "password": "Test1234",
-        "name": "Test User",
-    })
+    resp = await client.post(
+        "/api/v1/auth/register",
+        json={
+            "email": "test@example.com",
+            "password": "Test1234",
+            "name": "Test User",
+        },
+    )
     assert resp.status_code == 201
     return resp.json()["data"]
 

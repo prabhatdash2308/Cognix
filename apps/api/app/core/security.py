@@ -35,12 +35,14 @@ def needs_rehash(hashed: str) -> bool:
 
 # ─── Token helpers ────────────────────────────────────────────────────────────
 
+
 def generate_secure_token(nbytes: int = 32) -> str:
     """Return a URL-safe, cryptographically secure random token string."""
     return secrets.token_urlsafe(nbytes)
 
 
 # ─── JWT ──────────────────────────────────────────────────────────────────────
+
 
 def create_access_token(
     subject: str,

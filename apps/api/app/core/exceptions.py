@@ -17,6 +17,7 @@ class CognixException(HTTPException):
 
 # ─── 400 Bad Request ──────────────────────────────────────────────────────────
 
+
 class BadRequestError(CognixException):
     def __init__(self, message: str = "Bad request", code: str = "bad_request") -> None:
         super().__init__(status.HTTP_400_BAD_REQUEST, code, message)
@@ -24,8 +25,11 @@ class BadRequestError(CognixException):
 
 # ─── 401 Unauthorized ─────────────────────────────────────────────────────────
 
+
 class UnauthorizedError(CognixException):
-    def __init__(self, message: str = "Authentication required", code: str = "unauthorized") -> None:
+    def __init__(
+        self, message: str = "Authentication required", code: str = "unauthorized"
+    ) -> None:
         super().__init__(status.HTTP_401_UNAUTHORIZED, code, message)
 
 
@@ -50,6 +54,7 @@ class InvalidTokenError(CognixException):
 
 # ─── 403 Forbidden ────────────────────────────────────────────────────────────
 
+
 class ForbiddenError(CognixException):
     def __init__(self, message: str = "Access denied", code: str = "forbidden") -> None:
         super().__init__(status.HTTP_403_FORBIDDEN, code, message)
@@ -63,6 +68,7 @@ class InsufficientPermissionsError(CognixException):
 
 # ─── 404 Not Found ────────────────────────────────────────────────────────────
 
+
 class NotFoundError(CognixException):
     def __init__(self, resource: str = "Resource") -> None:
         super().__init__(
@@ -73,6 +79,7 @@ class NotFoundError(CognixException):
 
 
 # ─── 409 Conflict ─────────────────────────────────────────────────────────────
+
 
 class ConflictError(CognixException):
     def __init__(self, message: str, code: str = "conflict") -> None:
@@ -99,6 +106,7 @@ class SlugAlreadyTakenError(CognixException):
 
 # ─── 410 Gone ─────────────────────────────────────────────────────────────────
 
+
 class InvitationExpiredError(CognixException):
     def __init__(self) -> None:
         super().__init__(
@@ -109,6 +117,7 @@ class InvitationExpiredError(CognixException):
 
 
 # ─── 422 Unprocessable ────────────────────────────────────────────────────────
+
 
 class ValidationError(CognixException):
     def __init__(self, message: str) -> None:

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, ClassVar
 
 from sqlalchemy import DateTime, String, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -17,7 +17,7 @@ def _utcnow() -> datetime:
 class Base(DeclarativeBase):
     """Shared declarative base for all models."""
 
-    type_annotation_map: dict[Any, Any] = {
+    type_annotation_map: ClassVar[dict[Any, Any]] = {
         datetime: DateTime(timezone=True),
     }
 

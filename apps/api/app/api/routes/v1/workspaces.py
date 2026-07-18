@@ -84,7 +84,9 @@ async def list_workspace_members(
     return DataResponse(data=responses)
 
 
-@router.post("/{workspace_id}/members", response_model=DataResponse[WorkspaceMemberResponse], status_code=201)
+@router.post(
+    "/{workspace_id}/members", response_model=DataResponse[WorkspaceMemberResponse], status_code=201
+)
 async def add_workspace_member(
     workspace_id: str,
     body: AddMemberRequest,

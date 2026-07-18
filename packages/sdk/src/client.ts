@@ -156,15 +156,18 @@ class AuthClient {
   }
 
   async logout(body: LogoutRequest): Promise<void> {
-    await this.http.request<void>("/api/v1/auth/logout", { method: "POST", body });
+    await this.http.request<undefined>("/api/v1/auth/logout", { method: "POST", body });
   }
 
   async requestPasswordReset(body: PasswordResetRequest): Promise<void> {
-    await this.http.request<void>("/api/v1/auth/password-reset", { method: "POST", body });
+    await this.http.request<undefined>("/api/v1/auth/password-reset", { method: "POST", body });
   }
 
   async confirmPasswordReset(body: PasswordResetConfirm): Promise<void> {
-    await this.http.request<void>("/api/v1/auth/password-reset/confirm", { method: "POST", body });
+    await this.http.request<undefined>("/api/v1/auth/password-reset/confirm", {
+      method: "POST",
+      body,
+    });
   }
 
   async verifyEmail(body: VerifyEmailRequest): Promise<User> {
@@ -198,7 +201,7 @@ class UsersClient {
   }
 
   async deleteAccount(): Promise<void> {
-    await this.http.request<void>("/api/v1/users/me", { method: "DELETE" });
+    await this.http.request<undefined>("/api/v1/users/me", { method: "DELETE" });
   }
 }
 
@@ -214,32 +217,30 @@ class OrganizationsClient {
   }
 
   async get(orgId: string): Promise<Organization> {
-    const r = await this.http.request<DataEnvelope<Organization>>(
-      `/api/v1/organizations/${orgId}`
-    );
+    const r = await this.http.request<DataEnvelope<Organization>>(`/api/v1/organizations/${orgId}`);
     return r.data;
   }
 
   async update(
     orgId: string,
-    body: { name?: string; slug?: string; logo_url?: string }
+    body: { name?: string; slug?: string; logo_url?: string },
   ): Promise<Organization> {
     const r = await this.http.request<DataEnvelope<Organization>>(
       `/api/v1/organizations/${orgId}`,
-      { method: "PATCH", body }
+      { method: "PATCH", body },
     );
     return r.data;
   }
 
   async members(orgId: string): Promise<Membership[]> {
     const r = await this.http.request<DataEnvelope<Membership[]>>(
-      `/api/v1/organizations/${orgId}/members`
+      `/api/v1/organizations/${orgId}/members`,
     );
     return r.data;
   }
 
   async removeMember(orgId: string, userId: string): Promise<void> {
-    await this.http.request<void>(`/api/v1/organizations/${orgId}/members/${userId}`, {
+    await this.http.request<undefined>(`/api/v1/organizations/${orgId}/members/${userId}`, {
       method: "DELETE",
     });
   }
@@ -248,10 +249,7 @@ class OrganizationsClient {
 class WorkspacesClient {
   constructor(private readonly http: CognixClient) {}
 
-  async create(
-    orgId: string,
-    body: { name: string; description?: string }
-  ): Promise<Workspace> {
+  async create(orgId: string, body: { name: string; description?: string }): Promise<Workspace> {
     const r = await this.http.request<DataEnvelope<Workspace>>("/api/v1/workspaces/", {
       method: "POST",
       body,
@@ -261,30 +259,28 @@ class WorkspacesClient {
   }
 
   async get(workspaceId: string): Promise<Workspace> {
-    const r = await this.http.request<DataEnvelope<Workspace>>(
-      `/api/v1/workspaces/${workspaceId}`
-    );
+    const r = await this.http.request<DataEnvelope<Workspace>>(`/api/v1/workspaces/${workspaceId}`);
     return r.data;
   }
 
   async update(
     workspaceId: string,
-    body: { name?: string; description?: string }
+    body: { name?: string; description?: string },
   ): Promise<Workspace> {
     const r = await this.http.request<DataEnvelope<Workspace>>(
       `/api/v1/workspaces/${workspaceId}`,
-      { method: "PATCH", body }
+      { method: "PATCH", body },
     );
     return r.data;
   }
 
   async delete(workspaceId: string): Promise<void> {
-    await this.http.request<void>(`/api/v1/workspaces/${workspaceId}`, { method: "DELETE" });
+    await this.http.request<undefined>(`/api/v1/workspaces/${workspaceId}`, { method: "DELETE" });
   }
 
   async members(workspaceId: string): Promise<WorkspaceMember[]> {
     const r = await this.http.request<DataEnvelope<WorkspaceMember[]>>(
-      `/api/v1/workspaces/${workspaceId}/members`
+      `/api/v1/workspaces/${workspaceId}/members`,
     );
     return r.data;
   }
@@ -295,7 +291,7 @@ class InvitationsClient {
 
   async invite(
     orgId: string,
-    body: { email: string; role_name?: string; workspace_id?: string }
+    body: { email: string; role_name?: string; workspace_id?: string },
   ): Promise<Invitation> {
     const r = await this.http.request<DataEnvelope<Invitation>>("/api/v1/invitations/", {
       method: "POST",
@@ -307,7 +303,7 @@ class InvitationsClient {
 
   async getByToken(token: string): Promise<Invitation> {
     const r = await this.http.request<DataEnvelope<Invitation>>(
-      `/api/v1/invitations/by-token/${token}`
+      `/api/v1/invitations/by-token/${token}`,
     );
     return r.data;
   }
@@ -321,7 +317,7 @@ class InvitationsClient {
   }
 
   async reject(invitationId: string): Promise<void> {
-    await this.http.request<void>(`/api/v1/invitations/${invitationId}/reject`, {
+    await this.http.request<undefined>(`/api/v1/invitations/${invitationId}/reject`, {
       method: "POST",
     });
   }
@@ -329,7 +325,7 @@ class InvitationsClient {
   async resend(invitationId: string): Promise<Invitation> {
     const r = await this.http.request<DataEnvelope<Invitation>>(
       `/api/v1/invitations/${invitationId}/resend`,
-      { method: "POST" }
+      { method: "POST" },
     );
     return r.data;
   }

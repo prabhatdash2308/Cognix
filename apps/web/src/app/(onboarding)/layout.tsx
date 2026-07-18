@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: { template: "%s · Cognix", default: "Setup · Cognix" },
@@ -18,10 +19,16 @@ export default function OnboardingLayout({
       </div>
 
       <header className="onboard-header">
-        <a href="/" className="onboard-logo">
+        <Link href="/" className="onboard-logo">
           <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden>
             <rect width="28" height="28" rx="8" fill="url(#g2)" />
-            <path d="M8 14h4l2-6 4 12 2-6h4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M8 14h4l2-6 4 12 2-6h4"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
             <defs>
               <linearGradient id="g2" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#6366f1" />
@@ -30,7 +37,7 @@ export default function OnboardingLayout({
             </defs>
           </svg>
           Cognix
-        </a>
+        </Link>
       </header>
 
       <main className="onboard-main">{children}</main>

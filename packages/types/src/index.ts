@@ -11,3 +11,5 @@ export * from "./auth.js";
 export * from "./workspace.js";
 export * from "./invitation.js";
 export * from "./preference.js";
+export * from "./activity.js";
+export * from "./notification.js";

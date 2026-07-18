@@ -152,7 +152,7 @@ class AuthService:
         try:
             payload = decode_refresh_token(refresh_token)
         except JWTError:
-            raise InvalidTokenError()
+            raise InvalidTokenError() from None
 
         session_id: str = payload["sid"]
         user_id: str = payload["sub"]
@@ -198,6 +198,7 @@ class AuthService:
             from jose import JWTError
 
             from app.core.security import decode_refresh_token
+
             try:
                 payload = decode_refresh_token(refresh_token)
                 session_id = payload.get("sid")
@@ -242,15 +243,17 @@ class AuthService:
 
     async def confirm_password_reset(self, token: str, new_password: str) -> None:
         """Validate reset token and update the password."""
-        result = await self._db.execute(
-            select(User).where(User.password_reset_token == token)
-        )
+        result = await self._db.execute(select(User).where(User.password_reset_token == token))
         user = result.scalar_one_or_none()
 
         if user is None or user.password_reset_expires_at is None:
             raise InvalidTokenError()
         now = datetime.now(UTC).replace(tzinfo=None)
-        expires_at = user.password_reset_expires_at.replace(tzinfo=None) if user.password_reset_expires_at.tzinfo else user.password_reset_expires_at
+        expires_at = (
+            user.password_reset_expires_at.replace(tzinfo=None)
+            if user.password_reset_expires_at.tzinfo
+            else user.password_reset_expires_at
+        )
         if expires_at < now:
             raise InvalidTokenError()
 
@@ -287,9 +290,7 @@ class AuthService:
 
     async def verify_email(self, token: str) -> User:
         """Mark the user's email as verified."""
-        result = await self._db.execute(
-            select(User).where(User.password_reset_token == token)
-        )
+        result = await self._db.execute(select(User).where(User.password_reset_token == token))
         user = result.scalar_one_or_none()
 
         if user is None or user.password_reset_expires_at is None:

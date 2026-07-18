@@ -35,9 +35,7 @@ class OrganizationMember(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     user: Mapped[User] = relationship(back_populates="org_memberships")  # type: ignore[name-defined]  # noqa: F821
     role: Mapped[Role] = relationship(back_populates="org_memberships")  # type: ignore[name-defined]  # noqa: F821
 
-    __table_args__ = (
-        UniqueConstraint("organization_id", "user_id", name="uq_org_member"),
-    )
+    __table_args__ = (UniqueConstraint("organization_id", "user_id", name="uq_org_member"),)
 
     def __repr__(self) -> str:
         return f"<OrganizationMember org={self.organization_id!r} user={self.user_id!r}>"
@@ -70,9 +68,7 @@ class WorkspaceMember(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     user: Mapped[User] = relationship(back_populates="workspace_memberships")  # type: ignore[name-defined]  # noqa: F821
     role: Mapped[Role] = relationship(back_populates="workspace_memberships")  # type: ignore[name-defined]  # noqa: F821
 
-    __table_args__ = (
-        UniqueConstraint("workspace_id", "user_id", name="uq_workspace_member"),
-    )
+    __table_args__ = (UniqueConstraint("workspace_id", "user_id", name="uq_workspace_member"),)
 
     def __repr__(self) -> str:
         return f"<WorkspaceMember ws={self.workspace_id!r} user={self.user_id!r}>"

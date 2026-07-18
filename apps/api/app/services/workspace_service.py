@@ -52,9 +52,7 @@ class WorkspaceService:
 
     async def get(self, workspace_id: str) -> Workspace:
         result = await self._db.execute(
-            select(Workspace).where(
-                Workspace.id == workspace_id, Workspace.deleted_at.is_(None)
-            )
+            select(Workspace).where(Workspace.id == workspace_id, Workspace.deleted_at.is_(None))
         )
         ws = result.scalar_one_or_none()
         if ws is None:
@@ -94,6 +92,7 @@ class WorkspaceService:
 
     async def soft_delete(self, ws: Workspace, actor: User) -> None:
         from datetime import datetime
+
         ws.deleted_at = datetime.now(UTC)
         await AuditService(self._db).log(
             action="workspace.deleted",
@@ -126,9 +125,7 @@ class WorkspaceService:
         )
         return membership
 
-    async def remove_member(
-        self, workspace_id: str, user_id: str, actor: User
-    ) -> None:
+    async def remove_member(self, workspace_id: str, user_id: str, actor: User) -> None:
         result = await self._db.execute(
             select(WorkspaceMember).where(
                 WorkspaceMember.workspace_id == workspace_id,

@@ -86,9 +86,7 @@ class InvitationService:
         return invitation
 
     async def get_by_token(self, token: str) -> Invitation:
-        result = await self._db.execute(
-            select(Invitation).where(Invitation.token == token)
-        )
+        result = await self._db.execute(select(Invitation).where(Invitation.token == token))
         invitation = result.scalar_one_or_none()
         if invitation is None:
             raise NotFoundError("Invitation")
@@ -109,9 +107,7 @@ class InvitationService:
 
         # Grant workspace membership if specified
         if invitation.workspace_id:
-            await rbac.assign_workspace_role(
-                accepting_user.id, invitation.workspace_id, role_name
-            )
+            await rbac.assign_workspace_role(accepting_user.id, invitation.workspace_id, role_name)
 
         invitation.status = "accepted"
 
@@ -137,9 +133,7 @@ class InvitationService:
         )
 
     async def resend(self, invitation_id: str, actor: User) -> Invitation:
-        result = await self._db.execute(
-            select(Invitation).where(Invitation.id == invitation_id)
-        )
+        result = await self._db.execute(select(Invitation).where(Invitation.id == invitation_id))
         invitation = result.scalar_one_or_none()
         if invitation is None:
             raise NotFoundError("Invitation")
@@ -148,9 +142,7 @@ class InvitationService:
 
         invitation.token = generate_secure_token(32)
         invitation.status = "pending"
-        invitation.expires_at = (
-            datetime.now(UTC) + timedelta(seconds=settings.invitation_ttl)
-        )
+        invitation.expires_at = datetime.now(UTC) + timedelta(seconds=settings.invitation_ttl)
 
         logger.info(
             "[EMAIL STUB] Resent invitation for %s: /join?token=%s",

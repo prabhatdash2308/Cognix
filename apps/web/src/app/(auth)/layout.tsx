@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import type { Route } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: {
@@ -21,10 +23,16 @@ export default function AuthLayout({ children }: { children: ReactNode }): React
 
       {/* Branding */}
       <header className="auth-header">
-        <a href="/" className="auth-logo" aria-label="Cognix home">
+        <Link href="/" className="auth-logo" aria-label="Cognix home">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden>
             <rect width="28" height="28" rx="8" fill="url(#g1)" />
-            <path d="M8 14h4l2-6 4 12 2-6h4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M8 14h4l2-6 4 12 2-6h4"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
             <defs>
               <linearGradient id="g1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#6366f1" />
@@ -33,21 +41,19 @@ export default function AuthLayout({ children }: { children: ReactNode }): React
             </defs>
           </svg>
           <span>Cognix</span>
-        </a>
+        </Link>
       </header>
 
       {/* Card */}
       <main className="auth-main">
-        <div className="auth-card">
-          {children}
-        </div>
+        <div className="auth-card">{children}</div>
       </main>
 
       {/* Footer */}
       <footer className="auth-footer">
         <span>© 2026 Cognix. All rights reserved.</span>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        <Link href={"/privacy" as Route}>Privacy</Link>
+        <Link href={"/terms" as Route}>Terms</Link>
       </footer>
 
       <style>{`

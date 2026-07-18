@@ -12,6 +12,7 @@
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {
+    "@cognix/app-shell": "workspace:*",
     "@cognix/sdk": "workspace:*",
     "@cognix/types": "workspace:*",
     "@cognix/ui": "workspace:*",

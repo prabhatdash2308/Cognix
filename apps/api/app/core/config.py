@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     jwt_issuer: str = "cognix"
     jwt_audience: str = "cognix-app"
     jwt_algorithm: str = "HS256"
-    access_token_ttl: int = 900       # seconds — 15 minutes
+    access_token_ttl: int = 900  # seconds — 15 minutes
     refresh_token_ttl: int = 1_209_600  # seconds — 14 days
 
     # --- Email (stub) ---

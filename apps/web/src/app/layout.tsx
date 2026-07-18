@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { QueryProvider } from "@/providers/QueryProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 import "./globals.css";
 
@@ -32,7 +33,9 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body>
         <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <ThemeProvider defaultTheme="system">
+            <AuthProvider>{children}</AuthProvider>
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>

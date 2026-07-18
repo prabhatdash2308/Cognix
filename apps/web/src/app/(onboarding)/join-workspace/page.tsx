@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { getAccessToken } from "@/lib/auth";
 import { createAuthClient, apiClient } from "@/lib/api-client";
 
@@ -11,13 +12,18 @@ function JoinWorkspaceContent(): React.ReactElement {
   const token = searchParams.get("token") ?? "";
 
   const [status, setStatus] = useState<"loading" | "preview" | "accepting" | "success" | "error">(
-    token ? "loading" : "error"
+    token ? "loading" : "error",
   );
-  const [invitationInfo, setInvitationInfo] = useState<{ email: string; orgName?: string } | null>(null);
+  const [invitationInfo, setInvitationInfo] = useState<{ email: string; orgName?: string } | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!token) { setStatus("error"); return; }
+    if (!token) {
+      setStatus("error");
+      return;
+    }
     apiClient.invitations
       .getByToken(token)
       .then((inv) => {
@@ -34,7 +40,10 @@ function JoinWorkspaceContent(): React.ReactElement {
     setStatus("accepting");
     try {
       const accessToken = getAccessToken();
-      if (!accessToken) { router.push(`/sign-in?redirect=/join?token=${token}`); return; }
+      if (!accessToken) {
+        router.push(`/sign-in?redirect=/join?token=${token}`);
+        return;
+      }
       const client = createAuthClient(accessToken);
       await client.invitations.accept(token);
       setStatus("success");
@@ -60,7 +69,9 @@ function JoinWorkspaceContent(): React.ReactElement {
       <div className="join-card" style={{ textAlign: "center" }}>
         <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎉</div>
         <h1 className="join-title">You&apos;re in!</h1>
-        <p className="join-subtitle">You&apos;ve successfully joined the organization. Redirecting…</p>
+        <p className="join-subtitle">
+          You&apos;ve successfully joined the organization. Redirecting…
+        </p>
       </div>
     );
   }
@@ -70,42 +81,50 @@ function JoinWorkspaceContent(): React.ReactElement {
       <div className="join-card" style={{ textAlign: "center" }}>
         <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>❌</div>
         <h1 className="join-title">Invalid invitation</h1>
-        <p className="join-subtitle">
-          {error ?? "This invitation link is no longer valid."}
-        </p>
-        <a href="/sign-in" className="join-button" style={{ marginTop: "1.5rem", textDecoration: "none", display: "inline-flex" }}>
+        <p className="join-subtitle">{error ?? "This invitation link is no longer valid."}</p>
+        <Link
+          href="/sign-in"
+          className="join-button"
+          style={{ marginTop: "1.5rem", textDecoration: "none", display: "inline-flex" }}
+        >
           Go to sign in
-        </a>
+        </Link>
       </div>
     );
   }
 
   return (
     <div className="join-card">
-      <div className="join-envelope" aria-hidden>✉️</div>
+      <div className="join-envelope" aria-hidden>
+        ✉️
+      </div>
       <h1 className="join-title">You&apos;ve been invited</h1>
       <p className="join-subtitle">
         You have been invited to join an organization on Cognix.
         {invitationInfo?.email && (
-          <> The invitation was sent to <strong style={{ color: "#94a3b8" }}>{invitationInfo.email}</strong>.</>
+          <>
+            {" "}
+            The invitation was sent to{" "}
+            <strong style={{ color: "#94a3b8" }}>{invitationInfo.email}</strong>.
+          </>
         )}
       </p>
 
       {error && <div className="join-error">{error}</div>}
 
       <div className="join-actions">
-        <button
-          onClick={handleAccept}
-          className="join-button"
-          disabled={status === "accepting"}
-        >
+        <button onClick={handleAccept} className="join-button" disabled={status === "accepting"}>
           {status === "accepting" ? (
-            <><span className="join-btn-spinner" aria-hidden /> Joining…</>
+            <>
+              <span className="join-btn-spinner" aria-hidden /> Joining…
+            </>
           ) : (
             "Accept invitation"
           )}
         </button>
-        <a href="/" className="join-link">Decline</a>
+        <Link href="/" className="join-link">
+          Decline
+        </Link>
       </div>
 
       <style>{`
