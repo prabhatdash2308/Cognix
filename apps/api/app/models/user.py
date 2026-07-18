@@ -44,6 +44,9 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, SoftDeleteMixin, Base):
     audit_logs: Mapped[list[AuditLog]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="user"
     )
+    project_memberships: Mapped[list[ProjectMember]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+        back_populates="user", cascade="all, delete-orphan"
+    )
 
     def __repr__(self) -> str:
         return f"<User id={self.id!r} email={self.email!r}>"

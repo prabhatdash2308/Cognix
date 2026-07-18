@@ -6,6 +6,7 @@ from app.models.invitation import Invitation
 from app.models.membership import OrganizationMember, WorkspaceMember
 from app.models.organization import Organization
 from app.models.preference import Preference
+from app.models.project import Project, ProjectMember
 from app.models.role import Permission, Role, RolePermission
 from app.models.session import Session
 from app.models.user import User
@@ -19,6 +20,8 @@ __all__ = [
     "OrganizationMember",
     "Permission",
     "Preference",
+    "Project",
+    "ProjectMember",
     "Role",
     "RolePermission",
     "Session",

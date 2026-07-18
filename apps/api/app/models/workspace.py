@@ -34,6 +34,9 @@ class Workspace(UUIDPrimaryKeyMixin, TimestampMixin, SoftDeleteMixin, Base):
     invitations: Mapped[list[Invitation]] = relationship(  # type: ignore[name-defined]  # noqa: F821
         back_populates="workspace"
     )
+    projects: Mapped[list[Project]] = relationship(  # type: ignore[name-defined]  # noqa: F821
+        back_populates="workspace", cascade="all, delete-orphan"
+    )
 
     def __repr__(self) -> str:
         return f"<Workspace id={self.id!r} slug={self.slug!r}>"

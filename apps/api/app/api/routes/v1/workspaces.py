@@ -7,6 +7,7 @@ from fastapi import APIRouter
 from app.core.database import DbSession
 from app.core.dependencies import CurrentUser
 from app.schemas.common import DataResponse
+from app.schemas.project import ProjectResponse
 from app.schemas.workspace import (
     AddMemberRequest,
     WorkspaceCreate,
@@ -14,6 +15,7 @@ from app.schemas.workspace import (
     WorkspaceResponse,
     WorkspaceUpdate,
 )
+from app.services.project_service import ProjectService
 from app.services.workspace_service import WorkspaceService
 
 router = APIRouter(prefix="/workspaces", tags=["workspaces"])
@@ -111,3 +113,13 @@ async def remove_workspace_member(
     db: DbSession,
 ) -> None:
     await WorkspaceService(db).remove_member(workspace_id, user_id, user)
+
+
+@router.get("/{workspace_id}/projects", response_model=DataResponse[list[ProjectResponse]])
+async def list_workspace_projects(
+    workspace_id: str,
+    user: CurrentUser,
+    db: DbSession,
+) -> DataResponse[list[ProjectResponse]]:
+    projects = await ProjectService(db).list_for_workspace(workspace_id)
+    return DataResponse(data=[ProjectResponse.model_validate(p) for p in projects])

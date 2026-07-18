@@ -12,6 +12,13 @@ import type {
 import type { User } from "@cognix/types";
 import type { Organization, Membership } from "@cognix/types";
 import type { Workspace, WorkspaceMember } from "@cognix/types";
+import type {
+  Project,
+  ProjectMember,
+  ProjectRole,
+  ProjectVisibility,
+  ProjectStatus,
+} from "@cognix/types";
 import type { Invitation } from "@cognix/types";
 import type { UserPreference, UpdatePreferenceRequest } from "@cognix/types";
 
@@ -59,6 +66,7 @@ export class CognixClient {
   public readonly users: UsersClient;
   public readonly organizations: OrganizationsClient;
   public readonly workspaces: WorkspacesClient;
+  public readonly projects: ProjectsClient;
   public readonly invitations: InvitationsClient;
   public readonly preferences: PreferencesClient;
 
@@ -71,6 +79,7 @@ export class CognixClient {
     this.users = new UsersClient(this);
     this.organizations = new OrganizationsClient(this);
     this.workspaces = new WorkspacesClient(this);
+    this.projects = new ProjectsClient(this);
     this.invitations = new InvitationsClient(this);
     this.preferences = new PreferencesClient(this);
   }
@@ -284,6 +293,13 @@ class WorkspacesClient {
     );
     return r.data;
   }
+
+  async projects(workspaceId: string): Promise<Project[]> {
+    const r = await this.http.request<DataEnvelope<Project[]>>(
+      `/api/v1/workspaces/${workspaceId}/projects`,
+    );
+    return r.data;
+  }
 }
 
 class InvitationsClient {
@@ -345,5 +361,95 @@ class PreferencesClient {
       body,
     });
     return r.data;
+  }
+}
+
+class ProjectsClient {
+  constructor(private readonly http: CognixClient) {}
+
+  async create(
+    workspaceId: string,
+    body: {
+      name: string;
+      description?: string;
+      emoji?: string;
+      color?: string;
+      visibility?: ProjectVisibility;
+      settings?: Record<string, unknown>;
+      metadata?: Record<string, unknown>;
+    },
+  ): Promise<Project> {
+    const r = await this.http.request<DataEnvelope<Project>>("/api/v1/projects/", {
+      method: "POST",
+      body,
+      params: { workspace_id: workspaceId },
+    });
+    return r.data;
+  }
+
+  async get(projectId: string): Promise<Project> {
+    const r = await this.http.request<DataEnvelope<Project>>(`/api/v1/projects/${projectId}`);
+    return r.data;
+  }
+
+  async update(
+    projectId: string,
+    body: {
+      name?: string;
+      description?: string;
+      emoji?: string;
+      color?: string;
+      visibility?: ProjectVisibility;
+      status?: ProjectStatus;
+      settings?: Record<string, unknown>;
+      metadata?: Record<string, unknown>;
+    },
+  ): Promise<Project> {
+    const r = await this.http.request<DataEnvelope<Project>>(`/api/v1/projects/${projectId}`, {
+      method: "PATCH",
+      body,
+    });
+    return r.data;
+  }
+
+  async delete(projectId: string): Promise<void> {
+    await this.http.request<undefined>(`/api/v1/projects/${projectId}`, { method: "DELETE" });
+  }
+
+  async archive(projectId: string): Promise<Project> {
+    const r = await this.http.request<DataEnvelope<Project>>(
+      `/api/v1/projects/${projectId}/archive`,
+      { method: "POST" },
+    );
+    return r.data;
+  }
+
+  async restore(projectId: string): Promise<Project> {
+    const r = await this.http.request<DataEnvelope<Project>>(
+      `/api/v1/projects/${projectId}/restore`,
+      { method: "POST" },
+    );
+    return r.data;
+  }
+
+  async members(projectId: string): Promise<ProjectMember[]> {
+    const r = await this.http.request<DataEnvelope<ProjectMember[]>>(
+      `/api/v1/projects/${projectId}/members`,
+    );
+    return r.data;
+  }
+
+  async addMember(projectId: string, userId: string, role: ProjectRole): Promise<ProjectMember> {
+    const r = await this.http.request<DataEnvelope<ProjectMember>>(
+      `/api/v1/projects/${projectId}/members`,
+      { method: "POST", body: { user_id: userId, role } },
+    );
+    return r.data;
+  }
+
+  async removeMember(projectId: string, userId: string): Promise<void> {
+    await this.http.request<undefined>(`/api/v1/projects/${projectId}/members/${userId}`, {
+      method: "DELETE",
+    });
   }
 }

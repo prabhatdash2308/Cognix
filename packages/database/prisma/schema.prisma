@@ -33,6 +33,21 @@ enum AgentStatus {
 enum ProjectStatus {
   active
   archived
+  completed
+  on_hold
+}
+
+enum ProjectVisibility {
+  private
+  team
+  public
+}
+
+enum ProjectRole {
+  owner
+  admin
+  editor
+  viewer
 }
 
 enum TaskStatus {
@@ -80,10 +95,11 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
-  memberships     Membership[]
-  createdProjects Project[]     @relation("ProjectCreatedBy")
-  createdDocuments Document[]   @relation("DocumentCreatedBy")
-  assignedTasks   Task[]        @relation("TaskAssignedUser")
+  memberships      Membership[]
+  projectMembers   ProjectMember[]
+  createdProjects  Project[]       @relation("ProjectCreatedBy")
+  createdDocuments Document[]      @relation("DocumentCreatedBy")
+  assignedTasks    Task[]          @relation("TaskAssignedUser")
 }
 
 model Membership {
@@ -120,22 +136,45 @@ model Agent {
 }
 
 model Project {
-  id             String        @id @default(cuid())
+  id             String            @id @default(cuid())
   organizationId String
   name           String
+  slug           String
   description    String?
-  status         ProjectStatus @default(active)
+  emoji          String?
+  color          String?
+  visibility     ProjectVisibility @default(team)
+  status         ProjectStatus     @default(active)
+  settings       Json              @default("{}")
+  metadata       Json              @default("{}")
+  archivedAt     DateTime?
   createdById    String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
 
-  organization Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  createdBy    User          @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User            @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  members      ProjectMember[]
   tasks        Task[]
   memories     MemoryEntry[]
   documents    Document[]
 
   @@index([organizationId])
+  @@index([slug])
+}
+
+model ProjectMember {
+  id        String      @id @default(cuid())
+  projectId String
+  userId    String
+  role      ProjectRole @default(viewer)
+  joinedAt  DateTime    @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@index([userId])
 }
 
 model Task {
